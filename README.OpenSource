@@ -1,0 +1,11 @@
+[
+    {
+        "Name": " recyclerviewanimators4cj",
+        "License": " Apache 2.0 ",
+        "License File": "LICENSE",
+        "Version Number": "0.0.1 ",
+        "Owner": "wasabeef"
+        "Upstream URL": "https://github.com/wasabeef/recyclerview-animators",
+        "Description": " RecyclerViewAnimators4cj 是基于Android 动画库实现的recyclerview-animators 的 Cangjie 移植版本，用于添加动画效果"
+    }
+]

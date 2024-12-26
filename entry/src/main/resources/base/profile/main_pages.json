@@ -1,0 +1,7 @@
+{
+  "src": [
+    "pages/main",
+    "pages/index_item_animator",
+    "pages/index_adapter_animator"
+  ]
+}

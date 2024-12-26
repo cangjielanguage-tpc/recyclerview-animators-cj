@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "recyclerview",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}
