@@ -1,5 +1,5 @@
-/**
- * Created on 2024/11/29
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package recyclerview
 
