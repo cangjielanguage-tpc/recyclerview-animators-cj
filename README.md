@@ -152,7 +152,11 @@ class TestExample {
 
 ## 约束与限制
 
-1. 当前基于 deveco-studio-5.0.3.910 版本实现
+在下述版本验证通过：
+
+    DevEco Studio (5.0.9.100) 
+    Cangjie Support Plugin 5.0.9.100
+    Cangjie Compiler: 0.53.18
 
 ## 开源协议
 
