@@ -59,11 +59,29 @@ class IndexItemAnimator {
             AnimType('OvershootInLeft', ItemAnimationType.OvershootInLeft)
         ]
     );
+    private var animTimes: Array<SelectOption> = Array<SelectOption>(
+        [
+            SelectOption('0.5s', icon: @r(app.media.icon)),
+            SelectOption('3s', icon: @r(app.media.icon)),
+            SelectOption('60s', icon: @r(app.media.icon)),
+            SelectOption('1000s', icon: @r(app.media.icon))
+        ]
+    );
+    private var animTime: ArrayList<AnimTime> = ArrayList<AnimTime>(
+        [
+            AnimTime('0.5s', 500),
+            AnimTime('3s', 3000),
+            AnimTime('60s', 60000),
+            AnimTime('1000s', 1000000)
+        ]
+    );
 
     @State
     var controller: Controller = Controller()
     @State
     var selectIndex: Int32 = 0
+    @State
+    var selectIndex1: Int32 = 0
     @State
     var listDataTailFlag: Int64 = this.listDatas.size - 1;
     @State
@@ -88,6 +106,19 @@ class IndexItemAnimator {
                             index: Int32, text: String =>
                             this.selectIndex = index
                             this.controller.setItemAnimation(this.animTypes[Int64(index)].enumType)
+                        }
+                    )
+                }.width(70.percent).height(50).backgroundColor(0x3dc49d)
+
+                Flex(
+                    FlexParams(direction: FlexDirection.Row, alignItems: ItemAlign.Center,
+                    justifyContent: FlexAlign.Start)) {
+                    Select(this.animTimes).selected(this.selectIndex1).value(
+                        this.animTime[Int64(this.selectIndex1)].value).backgroundColor(0x3dc49d).onSelect(
+                        {
+                            index: Int32, text: String =>
+                            this.selectIndex1 = index
+                            this.controller.setDuration(this.animTime[Int64(index)].time)
                         }
                     )
                 }.width(70.percent).height(50).backgroundColor(0x3dc49d)
@@ -140,5 +171,15 @@ class AnimType {
     public init(value: String, enumType: ItemAnimationType) {
         this.value = value
         this.enumType = enumType
+    }
+}
+
+class AnimTime {
+    var value: String
+    var time: Int32
+
+    public init(value: String, time: Int32) {
+        this.value = value
+        this.time = time
     }
 }
