@@ -370,12 +370,12 @@ public class Controller {
         this.isFirstOnly = isFirstOnly
     }
 
-    public func setWidth(width: Float64) {
+    public func setMovingWidth(width: Float64) {
         this.mWidth = width
         return this
     }
 
-    public func setHeight(height: Float64) {
+    public func setMovingHeight(height: Float64) {
         this.mHeight = height
         return this
     }

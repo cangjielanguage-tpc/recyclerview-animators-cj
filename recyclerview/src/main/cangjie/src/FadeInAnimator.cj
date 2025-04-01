@@ -50,6 +50,9 @@ class FadeInAnimator {
     }
 
     public func addValue(index: Int64, value: String) {
+        if (0 > index) {
+        	return
+        }
         AppLog.info("FadeInAnimator add index: " + index.toString() + ", value:" + value)
         if (!this.isClick) {
             return
@@ -80,6 +83,9 @@ class FadeInAnimator {
     }
 
     public func deleteValue(index: Int64) {
+        if (0 > index) {
+        	return
+        }
         if (!this.isClick) {
             return
         }
