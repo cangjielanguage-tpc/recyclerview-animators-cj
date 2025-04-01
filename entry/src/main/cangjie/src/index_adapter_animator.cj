@@ -50,7 +50,7 @@ class IndexAdapterAnimator {
         this.controller.setItemAnimation(ItemAnimationType.Default)
         this.controller.setAdapterAnimation(AdapterAnimationType.AlphaIn)
         this.controller.setFirstOnly(false)
-        this.controller.setDuration(500)
+        this.controller.setDuration(3000)
     }
 
     func build() {
@@ -73,7 +73,6 @@ class IndexAdapterAnimator {
                     columnsNum: 1
                 )
             }.margin(top: 50)
-
         }.width(100.percent).height(100.percent)
     }
 

@@ -343,8 +343,8 @@ public class Controller {
     @Publish
     var adapterAnimation: AdapterAnimationType = AdapterAnimationType.AlphaIn
     var isFirstOnly: Bool = false
-    public var mWidth: Float64 = 480.0;
-    public var mHeight: Float64 = 855.0;
+    public var mWidth: Float64 = 80.0;
+    public var mHeight: Float64 = 50.0;
 
     public func addValue(index: Int64, value: String) {
         this.addValueCallback(index, value)
@@ -370,12 +370,12 @@ public class Controller {
         this.isFirstOnly = isFirstOnly
     }
 
-    public func setWidth(width: Float64) {
+    public func setMovingWidth(width: Float64) {
         this.mWidth = width
         return this
     }
 
-    public func setHeight(height: Float64) {
+    public func setMovingHeight(height: Float64) {
         this.mHeight = height
         return this
     }

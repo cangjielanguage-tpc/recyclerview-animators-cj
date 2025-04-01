@@ -53,6 +53,9 @@ class OvershootInRightAnimator {
     }
 
     func addValue(index: Int64, value: String) {
+        if (0 > index) {
+        	return
+        }
         if (!this.isClick) {
             return
         }
@@ -92,6 +95,9 @@ class OvershootInRightAnimator {
     }
 
     func deleteValue(index: Int64) {
+        if (0 > index) {
+        	return
+        }
         if (!this.isClick) {
             return
         }

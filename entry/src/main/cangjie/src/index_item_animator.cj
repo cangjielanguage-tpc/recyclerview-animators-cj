@@ -12,6 +12,7 @@ import recyclerview.RecyclerView
 import recyclerview.ItemAnimationType
 import recyclerview.AdapterAnimationType
 import recyclerview.Controller
+import ohos.hilog.Hilog
 
 @Entry
 @Component
@@ -65,6 +66,8 @@ class IndexItemAnimator {
     @State
     var selectIndex: Int32 = 0
     @State
+    var valIndex: Int32 = 0
+    @State
     var listDataTailFlag: Int64 = this.listDatas.size - 1;
     @State
     var addFlag: Int64 = 0;
@@ -75,6 +78,12 @@ class IndexItemAnimator {
         this.controller.setDuration(500)
         this.controller.setFirstOnly(false)
     }
+
+    func asd():String {
+        Hilog.info(0x0000, "recycler123", "value:${this.animTypes[Int64(this.selectIndex)].value}")
+        return this.animTypes[Int64(this.selectIndex)].value
+    }
+
 
     func build() {
         Stack(Alignment.Top) {
@@ -97,8 +106,9 @@ class IndexItemAnimator {
                         {
                             event =>
                                 this.addFlag += 1
-                                this.controller.addValue(0, "ADD");
+                                this.controller.addValue(0, "add_${valIndex}");
                                 this.listDataTailFlag += 1
+                                this.valIndex ++
                         }
                     )
                     Text('DEL').fontSize(18).padding(8).onClick(
@@ -129,7 +139,12 @@ class IndexItemAnimator {
         Column() {
             Image(@r(app.media.sample13)).width(100.percent).height(100)
             Text(itemData + '').fontSize(20).textAlign(TextAlign.Center).width(100.percent)
-        }.margin(10)
+        }.margin(asddd(itemData))
+    }
+
+    func asddd(itemData: String):Int64 {
+        Hilog.info(0x0000, "recycler123", "itemData:${itemData}")
+        return 10
     }
 }
 

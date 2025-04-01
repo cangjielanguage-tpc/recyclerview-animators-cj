@@ -21,6 +21,11 @@ class EntryView {
                 Button("ITEM SAMPLE PAGE").onClick({
                     e => Router.push(url: "IndexItemAnimator")
                 }).margin(top: 50)
+
+                Button("HLT_L0").width(80.percent).height(50).fontSize(18).margin(top: 10).onClick({evt =>Router.push(url:"Index_L0")})
+                Button("HLT_L1").width(80.percent).height(50).fontSize(18).margin(top: 10).onClick({evt =>Router.push(url:"Index_L1")})
+                Button("HLT_L2").width(80.percent).height(50).fontSize(18).margin(top: 10,bottom:10).onClick({evt =>Router.push(url:"Index_L2")})
+
             }.width(100.percent)
         }.width(100.percent)
     }

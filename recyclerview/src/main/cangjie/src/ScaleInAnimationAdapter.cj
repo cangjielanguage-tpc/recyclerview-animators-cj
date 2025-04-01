@@ -70,8 +70,8 @@ class ScaleInAnimationAdapter {
                         let temp = AnimationAdapterTypeData(1.0, item.value);
                         this.animateList[index] = temp
                     } else {
-                        if (this.controller.isFirstOnly) {
-                            let temp = AnimationAdapterTypeData(1.0, item.value);
+                        if (!this.controller.isFirstOnly) {
+                            let temp = AnimationAdapterTypeData(0.0, item.value);
                             this.animateList[index] = temp
                         }
                     }
