@@ -51,6 +51,9 @@ class ScaleInRightAnimator {
     }
 
     func addValue(index: Int64, value: String) {
+        if (0 > index) {
+        	return
+        }
         if (!this.isClick) {
             return
         }
@@ -81,6 +84,9 @@ class ScaleInRightAnimator {
     }
 
     func deleteValue(index: Int64) {
+        if (0 > index) {
+        	return
+        }
         if (!this.isClick) {
             return
         }

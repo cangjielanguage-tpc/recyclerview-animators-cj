@@ -72,20 +72,20 @@ public class Controller {
     public func setFirstOnly(isFirstOnly: Bool)
 
     /**
-     * 设置宽度
+     * 设置x轴偏移宽度
      *
-     * @param width 宽度
+     * @param width x轴偏移宽度
      * @return Controller对象
      */
-    public func setWidth(width: Float64): Controller
+    public func setMovingWidth(width: Float64): Controller
 
     /**
-     * 设置高度
+     * 设置y轴偏移高度
      *
-     * @param height 高度
+     * @param height y轴偏移高度
      * @return Controller对象
      */
-    public func setHeight(height: Float64): Controller
+    public func setMovingHeight(height: Float64): Controller
 
     /**
      * 获取条目动画类型

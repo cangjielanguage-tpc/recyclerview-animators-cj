@@ -53,6 +53,9 @@ class SlideInLeftAnimator {
     }
 
     func addValue(index: Int64, value: String) {
+        if (0 > index) {
+        	return
+        }
         if (!this.isClick) {
             return
         }
@@ -85,6 +88,9 @@ class SlideInLeftAnimator {
     }
 
     func deleteValue(index: Int64) {
+        if (0 > index) {
+        	return
+        }
         if (!this.isClick) {
             return
         }

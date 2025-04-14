@@ -66,7 +66,7 @@ class SlideInBottomAnimationAdapter {
                         let temp = AnimationAdapterTypeData(0.0, item.value);
                         this.animateList[index] = temp
                     } else {
-                        if (this.controller.isFirstOnly) {
+                        if (!this.controller.isFirstOnly) {
                             let temp = AnimationAdapterTypeData(this.controller.mHeight, item.value);
                             this.animateList[index] = temp
                         }

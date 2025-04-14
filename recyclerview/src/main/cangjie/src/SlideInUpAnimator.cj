@@ -33,6 +33,7 @@ class SlideInUpAnimator {
     @Link
     var columnsNum: Int64 = 1;
     var colNumStr: String = '';
+    var indexX: Int64 = -1;
 
     protected override func aboutToAppear() {
         this.controller.addValueCallback = {
@@ -53,6 +54,10 @@ class SlideInUpAnimator {
     }
 
     public func addValue(index: Int64, value: String) {
+        if (0 > index) {
+        	return
+        }
+        indexX = index
         if (!this.isClick) {
             return
         }
@@ -85,6 +90,9 @@ class SlideInUpAnimator {
     }
 
     public func deleteValue(index: Int64) {
+        if (0 > index) {
+        	return
+        }
         if (!this.isClick) {
             return
         }
@@ -118,13 +126,21 @@ class SlideInUpAnimator {
         }
     }
 
+    func childValue(index: Int64, value: String):String {
+        if (index >= 0) {
+            indexX = -1
+        	return this.myArr[index].value
+        }
+        return value
+    }
+
     func build() {
         Grid {
             ForEach(
                 this.myArr,
                 {
                     item: ArrayType, _: Int64 => GridItem() {
-                        child(item.value)
+                        child(childValue(indexX, item.value))
                     }.opacity(if (item.isNewValue) {
                         this.trans
                     } else {
