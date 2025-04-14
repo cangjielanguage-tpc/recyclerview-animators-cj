@@ -389,7 +389,7 @@ public class Controller {
     }
 }
 
-public class ArrayType {
+public class ArrayType <: ToString {
     public var isNewValue: Bool
     public var value: String
 
@@ -401,6 +401,10 @@ public class ArrayType {
     public init(that: ArrayType) {
         this.isNewValue = that.isNewValue
         this.value = that.value
+    }
+
+    public override func toString():String {
+        return value
     }
 }
 
