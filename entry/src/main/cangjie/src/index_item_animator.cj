@@ -12,7 +12,6 @@ import recyclerview.RecyclerView
 import recyclerview.ItemAnimationType
 import recyclerview.AdapterAnimationType
 import recyclerview.Controller
-import ohos.hilog.Hilog
 
 @Entry
 @Component
@@ -80,7 +79,6 @@ class IndexItemAnimator {
     }
 
     func asd():String {
-        Hilog.info(0x0000, "recycler123", "value:${this.animTypes[Int64(this.selectIndex)].value}")
         return this.animTypes[Int64(this.selectIndex)].value
     }
 
@@ -143,7 +141,6 @@ class IndexItemAnimator {
     }
 
     func asddd(itemData: String):Int64 {
-        Hilog.info(0x0000, "recycler123", "itemData:${itemData}")
         return 10
     }
 }

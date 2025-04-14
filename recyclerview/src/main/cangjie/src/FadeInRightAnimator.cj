@@ -10,7 +10,6 @@ import ohos.state_macro_manage.*
 import ohos.state_manage.*
 import std.time.*
 import std.sync.*
-import ohos.hilog.Hilog
 
 @Component
 class FadeInRightAnimator {
@@ -55,7 +54,6 @@ class FadeInRightAnimator {
         if (0 > index) {
         	return
         }
-        Hilog.info(0x0000, "recycler123", "1111111111")
         if (!this.isClick) {
             return
         }
@@ -65,7 +63,6 @@ class FadeInRightAnimator {
         this.duration = 0
         this.offsetX = 50
         this.myArr.insert(index, newArr)
-        Hilog.info(0x0000, "recycler123", "${myArr.size}")
 
         Timer.once(200 * Duration.millisecond) { =>
             spawn(Main) {

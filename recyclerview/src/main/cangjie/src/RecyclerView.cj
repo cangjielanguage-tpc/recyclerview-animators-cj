@@ -343,8 +343,8 @@ public class Controller {
     @Publish
     var adapterAnimation: AdapterAnimationType = AdapterAnimationType.AlphaIn
     var isFirstOnly: Bool = false
-    public var mWidth: Float64 = 80.0;
-    public var mHeight: Float64 = 50.0;
+    public var mWidth: Float64 = 480.0;
+    public var mHeight: Float64 = 855.0;
 
     public func addValue(index: Int64, value: String) {
         this.addValueCallback(index, value)
@@ -389,7 +389,7 @@ public class Controller {
     }
 }
 
-public class ArrayType {
+public class ArrayType <: ToString {
     public var isNewValue: Bool
     public var value: String
 
@@ -401,6 +401,10 @@ public class ArrayType {
     public init(that: ArrayType) {
         this.isNewValue = that.isNewValue
         this.value = that.value
+    }
+
+    public override func toString():String {
+        return value
     }
 }
 
