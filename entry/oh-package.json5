@@ -6,6 +6,6 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "recyclerview": "file:../recyclerview"
+    "@cangjie-tpc/recyclerview": "file:../recyclerview"
   }
 }
