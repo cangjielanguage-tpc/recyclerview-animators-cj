@@ -13,6 +13,7 @@ import recyclerview.ItemAnimationType
 import recyclerview.AdapterAnimationType
 import recyclerview.Controller
 import ohos.resource_manager.__GenerateResource__
+import ohos.hilog.Hilog
 
 @Entry
 @Component
@@ -105,7 +106,7 @@ class IndexItemAnimator {
                         {
                             event =>
                                 this.addFlag += 1
-                                this.controller.addValue(0, "add_${valIndex}");
+                                this.controller.addValue(0, "add_${valIndex}")
                                 this.listDataTailFlag += 1
                                 this.valIndex ++
                         }

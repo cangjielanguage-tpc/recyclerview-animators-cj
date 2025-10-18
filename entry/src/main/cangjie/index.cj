@@ -17,10 +17,10 @@ class EntryView {
             Column {
                 Button("ADAPTER SAMPLE PAGE").onClick({
                     e => Router.push(url: "IndexAdapterAnimator")
-                }).margin(top: 50)
+                }).margin(top: 50).id("ADAPTER")
                 Button("ITEM SAMPLE PAGE").onClick({
                     e => Router.push(url: "IndexItemAnimator")
-                }).margin(top: 50)
+                }).margin(top: 50).id("ITEM")
 
             }.width(100.percent)
         }.width(100.percent)

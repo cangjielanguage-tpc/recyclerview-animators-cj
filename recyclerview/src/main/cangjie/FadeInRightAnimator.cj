@@ -31,17 +31,25 @@ class FadeInRightAnimator {
     var colNumStr: String = '';
 
     protected override func aboutToAppear() {
-        this.controller.addValueCallback = {
+        this
+            .controller
+            .addValueCallback = {
             index: Int64, value: String => this.addValue(index, value);
         }
 
-        this.controller.deleteValueCallback = {
+        this
+            .controller
+            .deleteValueCallback = {
             index: Int64 => this.deleteValue(index);
         }
 
-        for (idx in 0..this.array.size) {
+        for (idx in 0..this
+                .array
+                .size) {
             let newArr = ArrayType(false, this.array[idx]);
-            this.myArr.append(newArr)
+            this
+                .myArr
+                .append(newArr)
         }
         for (i in 0..this.columnsNum) {
             this.colNumStr += '1fr '
@@ -50,7 +58,7 @@ class FadeInRightAnimator {
 
     func addValue(index: Int64, value: String) {
         if (0 > index) {
-        	return
+            return
         }
         if (!this.isClick) {
             return
@@ -60,52 +68,67 @@ class FadeInRightAnimator {
         this.trans = 0
         this.duration = 0
         this.offsetX = 50
-        this.myArr.insert(index, newArr)
+        this
+            .myArr
+            .insert(index, newArr)
 
-        Timer.once(200 * Duration.millisecond) { =>
-            spawn(Main) {
+        Timer.once(200 * Duration.millisecond) {
+            =>
                 let newArr = ArrayType(true, value)
                 this.trans = 1
                 this.offsetX = 0
-                this.duration = this.controller.duration
+                this.duration = this
+                    .controller
+                    .duration
                 this.myArr[index] = newArr
 
-                Timer.once(Int64(this.controller.duration) * Duration.millisecond) { =>
-                    spawn(Main) {
-                        for (idx in 0..this.myArr.size) {
-                            this.myArr[idx].isNewValue = false
+                Timer.once(Int64(this
+                    .controller
+                    .duration) * Duration.millisecond) {
+                    =>
+                        for (idx in 0..this
+                                .myArr
+                                .size) {
+                            this
+                                .myArr[idx]
+                                .isNewValue = false
                         }
                         this.isClick = true
-                    }
                 }
-            }
         }
     }
 
     func deleteValue(index: Int64) {
         if (0 > index) {
-        	return
+            return
         }
         if (!this.isClick) {
             return
         }
-        if (index >= this.myArr.size) {
+        if (index >= this
+            .myArr
+            .size) {
             return
         }
         this.isClick = false
         let currentData = ArrayType(this.myArr[index])
         currentData.isNewValue = true
         this.trans = 0
-        this.duration = this.controller.duration
+        this.duration = this
+            .controller
+            .duration
         this.offsetX = 50
         this.myArr[index] = currentData
 
-        Timer.once(Int64(this.controller.duration) * Duration.millisecond) { =>
-            spawn(Main) {
+        Timer.once(Int64(this
+            .controller
+            .duration) * Duration.millisecond) {
+            =>
                 this.duration = 0
-                this.myArr.remove(index)
+                this
+                    .myArr
+                    .remove(index)
                 this.isClick = true
-            }
         }
     }
 
@@ -116,31 +139,39 @@ class FadeInRightAnimator {
                 {
                     item: ArrayType, _: Int64 => GridItem() {
                         child(item.value)
-                    }.animationStart(
-                        AnimateParam(
-                            duration: this.duration,
-                            curve: Curve.Ease,
-                            delay: 50, // 动画延迟
-                            iterations: 1, // 播放次数
-                            playMode: PlayMode.Normal
+                    }
+                        .animationStart(
+                            AnimateParam(
+                                duration: this.duration,
+                                curve: Curve.Ease,
+                                delay: 50, // 动画延迟
+                                iterations: 1, // 播放次数
+                                playMode: PlayMode.Normal
+                            )
                         )
-                    ).opacity(if (item.isNewValue) {
-                        this.trans
-                    } else {
-                        1
-                    }).offset(
-                        x: (if (item.isNewValue) {
-                            this.offsetX
+                        .opacity(if (item.isNewValue) {
+                            this.trans
                         } else {
-                            0
-                        }),
-                        y: 0
-                    ).animationEnd()
+                            1
+                        })
+                        .offset(
+                            x: (if (item.isNewValue) {
+                                this.offsetX
+                            } else {
+                                0
+                            }),
+                            y: 0
+                        )
+                        .animationEnd()
                 }
             )
-        }.columnsTemplate(this.colNumStr).columnsGap(2).rowsGap(2).onScrollIndex(
-            {
-            first: UInt32 => AppLog.info(first.toString())
-        }).width(100.percent)
+        }
+            .columnsTemplate(this.colNumStr)
+            .columnsGap(2)
+            .rowsGap(2)
+            .onScrollIndex({
+                first: UInt32 => AppLog.info(first.toString())
+            })
+            .width(100.percent)
     }
 }

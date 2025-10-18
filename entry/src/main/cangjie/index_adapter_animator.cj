@@ -19,10 +19,10 @@ import ohos.resource_manager.__GenerateResource__
 class IndexAdapterAnimator {
     var listDatas: ObservedArrayList<String> = ObservedArrayList<String>(
         ["Apple", "Ball", "Camera", "Day", "Egg", "Foo", "GL", "Hello", "Iron", "Japan", "Coke", "Dog", "Cat", "Yahoo",
-        "Sony", "Canon", "Fujitsu", "USA", "Nexus", "LINE", "Haskell", "C++", "Java", "Go", "Swift", "Objective-c",
-        "Ruby", "PHP", "Bash", "ksh", "C", "Groovy", "Kotlin", "Chip", "Japan", "U.S.A", "San Francisco", "Paris",
-        "Tokyo", "Silicon Valley", "London", "Spain", "China", "Taiwan", "Asia", "New York", "France", "Kyoto", "AD",
-        "GL", "iPhone", "iPad", "iPod", "Wasabeef"]);
+            "Sony", "Canon", "Fujitsu", "USA", "Nexus", "LINE", "Haskell", "C++", "Java", "Go", "Swift", "Objective-c",
+            "Ruby", "PHP", "Bash", "ksh", "C", "Groovy", "Kotlin", "Chip", "Japan", "U.S.A", "San Francisco", "Paris",
+            "Tokyo", "Silicon Valley", "London", "Spain", "China", "Taiwan", "Asia", "New York", "France", "Kyoto", "AD",
+            "GL", "iPhone", "iPad", "iPod", "Wasabeef"]);
     private var animTypes: ArrayList<AdaptAnimType> = ArrayList<AdaptAnimType>(
         [
             AdaptAnimType('AlphaIn', AdapterAnimationType.AlphaIn),
@@ -48,24 +48,45 @@ class IndexAdapterAnimator {
     var selectIndex: Int32 = 0
 
     protected override func aboutToAppear() {
-        this.controller.setItemAnimation(ItemAnimationType.Default)
-        this.controller.setAdapterAnimation(AdapterAnimationType.AlphaIn)
-        this.controller.setFirstOnly(false)
-        this.controller.setDuration(3000)
+        this
+            .controller
+            .setItemAnimation(ItemAnimationType.Default)
+        this
+            .controller
+            .setAdapterAnimation(AdapterAnimationType.AlphaIn)
+        this
+            .controller
+            .setFirstOnly(false)
+        this
+            .controller
+            .setDuration(3000)
     }
 
     func build() {
         Stack(Alignment.Top) {
-            Flex(FlexParams(direction: FlexDirection.Row, alignItems: ItemAlign.Start, justifyContent: FlexAlign.Start)
-            ) {
-            Select(this.selectOptions).selected(this.selectIndex).value(
-                    this.animTypes[Int64(this.selectIndex)].value).backgroundColor(0x3dc49d)
-                .onSelect({
-                    index: Int32, text: String =>
-                    this.selectIndex = index
-                    this.controller.setAdapterAnimation(this.animTypes[Int64(index)].enumType)
-                })
-            }.width(100.percent).height(50).backgroundColor(0x3dc49d)
+            Flex(FlexParams(direction: FlexDirection.Row, alignItems: ItemAlign.Start, justifyContent: FlexAlign.Start)) {
+                Select(this.selectOptions)
+                    .selected(this.selectIndex)
+                    .value(this
+                        .animTypes[Int64(this.selectIndex)]
+                        .value)
+                    .backgroundColor(0x3dc49d)
+                    .onSelect(
+                        {
+                            index: Int32, text: String =>
+                                this.selectIndex = index
+                                this
+                                    .controller
+                                    .setAdapterAnimation(this
+                                        .animTypes[Int64(index)]
+                                        .enumType)
+                        }
+                    )
+                .id("Select")
+            }
+                .width(100.percent)
+                .height(50)
+                .backgroundColor(0x3dc49d)
             Column() {
                 RecyclerView(
                     array: this.listDatas,
@@ -74,14 +95,21 @@ class IndexAdapterAnimator {
                     columnsNum: 1
                 )
             }.margin(top: 50)
-        }.width(100.percent).height(100.percent)
+        }
+            .width(100.percent)
+            .height(100.percent)
     }
 
     @Builder
     func SpecificChild(itemData: String) {
         Column() {
-            Image(@r(app.media.sample13)).width(100.percent).height(100)
-            Text(itemData + '').fontSize(20).textAlign(TextAlign.Center).width(100.percent)
+            Image(@r(app.media.sample13))
+                .width(100.percent)
+                .height(100)
+            Text(itemData + '')
+                .fontSize(20)
+                .textAlign(TextAlign.Center)
+                .width(100.percent)
         }.margin(10)
     }
 }
