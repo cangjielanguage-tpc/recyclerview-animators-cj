@@ -13,10 +13,12 @@ import recyclerview.AdapterAnimationType
 import recyclerview.ItemAnimationType
 import recyclerview.Controller
 import ohos.resource_manager.__GenerateResource__
+import ohos.resource_manager.AppResource
 
 @Entry
 @Component
 class IndexAdapterAnimator {
+    let iconStr: AppResource = @r(app.media.startIcon)
     var listDatas: ObservedArrayList<String> = ObservedArrayList<String>(
         ["Apple", "Ball", "Camera", "Day", "Egg", "Foo", "GL", "Hello", "Iron", "Japan", "Coke", "Dog", "Cat", "Yahoo",
             "Sony", "Canon", "Fujitsu", "USA", "Nexus", "LINE", "Haskell", "C++", "Java", "Go", "Swift", "Objective-c",
@@ -62,27 +64,147 @@ class IndexAdapterAnimator {
             .setDuration(3000)
     }
 
+    @Builder
+    func MyMenu() {
+        Menu() {
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[0]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setAdapterAnimation(this
+                                    .animTypes[0]
+                                    .enumType)
+                            content = this
+                                .animTypes[0]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[0]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[1]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setAdapterAnimation(this
+                                    .animTypes[1]
+                                    .enumType)
+                            content = this
+                                .animTypes[1]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[1]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[2]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setAdapterAnimation(this
+                                    .animTypes[2]
+                                    .enumType)
+                            content = this
+                                .animTypes[2]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[2]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[3]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setAdapterAnimation(this
+                                    .animTypes[3]
+                                    .enumType)
+                            content = this
+                                .animTypes[3]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[3]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[4]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setAdapterAnimation(this
+                                    .animTypes[4]
+                                    .enumType)
+                            content = this
+                                .animTypes[4]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[4]
+                    .value)
+        }
+    }
+
+    @State
+    var content: String = "AlphaIn"
+
     func build() {
         Stack(Alignment.Top) {
-            Flex(FlexParams(direction: FlexDirection.Row, alignItems: ItemAlign.Start, justifyContent: FlexAlign.Start)) {
-                Select(this.selectOptions)
-                    .selected(this.selectIndex)
-                    .value(this
-                        .animTypes[Int64(this.selectIndex)]
-                        .value)
-                    .backgroundColor(0x3dc49d)
-                    .onSelect(
-                        {
-                            index: Int32, text: String =>
-                                this.selectIndex = index
-                                this
-                                    .controller
-                                    .setAdapterAnimation(this
-                                        .animTypes[Int64(index)]
-                                        .enumType)
-                        }
-                    )
-                .id("Select")
+            Flex(FlexParams(direction: FlexDirection.Row, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Start)) {
+                Text(content)
+                    .fontWeight(FontWeight.Bold)
+                    .bindMenu(builder: this.MyMenu)
+                    .id("AdapterAnimator")
             }
                 .width(100.percent)
                 .height(50)

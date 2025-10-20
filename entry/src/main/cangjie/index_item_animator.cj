@@ -13,7 +13,6 @@ import recyclerview.ItemAnimationType
 import recyclerview.AdapterAnimationType
 import recyclerview.Controller
 import ohos.resource_manager.__GenerateResource__
-import ohos.hilog.Hilog
 
 @Entry
 @Component
@@ -69,60 +68,521 @@ class IndexItemAnimator {
     @State
     var valIndex: Int32 = 0
     @State
-    var listDataTailFlag: Int64 = this.listDatas.size - 1;
+    var listDataTailFlag: Int64 = this
+        .listDatas
+        .size - 1;
     @State
     var addFlag: Int64 = 0;
 
     protected override func aboutToAppear() {
-        this.controller.setAdapterAnimation(AdapterAnimationType.Default)
-        this.controller.setItemAnimation(ItemAnimationType.FadeIn)
-        this.controller.setDuration(500)
-        this.controller.setFirstOnly(false)
+        this
+            .controller
+            .setAdapterAnimation(AdapterAnimationType.Default)
+        this
+            .controller
+            .setItemAnimation(ItemAnimationType.FadeIn)
+        this
+            .controller
+            .setDuration(500)
+        this
+            .controller
+            .setFirstOnly(false)
     }
 
-    func asd():String {
-        return this.animTypes[Int64(this.selectIndex)].value
+    func asd(): String {
+        return this
+            .animTypes[Int64(this.selectIndex)]
+            .value
     }
 
+    @Builder
+    func MyMenu() {
+        Menu() {
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[0]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[0]
+                                    .enumType)
+                            content = this
+                                .animTypes[0]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[0]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[1]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[1]
+                                    .enumType)
+                            content = this
+                                .animTypes[1]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[1]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[2]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[2]
+                                    .enumType)
+                            content = this
+                                .animTypes[2]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[2]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[3]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[3]
+                                    .enumType)
+                            content = this
+                                .animTypes[3]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[3]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[4]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[4]
+                                    .enumType)
+                            content = this
+                                .animTypes[4]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[4]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[5]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[5]
+                                    .enumType)
+                            content = this
+                                .animTypes[5]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[5]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[6]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[6]
+                                    .enumType)
+                            content = this
+                                .animTypes[6]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[6]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[7]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[7]
+                                    .enumType)
+                            content = this
+                                .animTypes[7]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[7]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[8]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[8]
+                                    .enumType)
+                            content = this
+                                .animTypes[8]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[8]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[9]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[9]
+                                    .enumType)
+                            content = this
+                                .animTypes[9]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[9]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[10]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[10]
+                                    .enumType)
+                            content = this
+                                .animTypes[10]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[10]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[11]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[11]
+                                    .enumType)
+                            content = this
+                                .animTypes[11]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[11]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[12]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[12]
+                                    .enumType)
+                            content = this
+                                .animTypes[12]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[12]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[13]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[13]
+                                    .enumType)
+                            content = this
+                                .animTypes[13]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[13]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[14]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[14]
+                                    .enumType)
+                            content = this
+                                .animTypes[14]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[14]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[15]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[15]
+                                    .enumType)
+                            content = this
+                                .animTypes[15]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[15]
+                    .value)
+            MenuItem(
+                startIcon: "",
+                content: this
+                    .animTypes[16]
+                    .value,
+                endIcon: "",
+                labelInfo: "",
+            )
+                .selectIcon(true)
+                .onChange(
+                    {
+                        selected =>
+                            this
+                                .controller
+                                .setItemAnimation(this
+                                    .animTypes[16]
+                                    .enumType)
+                            content = this
+                                .animTypes[16]
+                                .value
+                    }
+                )
+                .id(this
+                    .animTypes[16]
+                    .value)
+        }.id("menu")
+    }
+
+    @State
+    var content: String = "FadeIn"
 
     func build() {
         Stack(Alignment.Top) {
             Flex(FlexParams(direction: FlexDirection.Row, alignItems: ItemAlign.Start, justifyContent: FlexAlign.Start)) {
                 Flex(
                     FlexParams(direction: FlexDirection.Row, alignItems: ItemAlign.Center,
-                    justifyContent: FlexAlign.Start)) {
-                    Select(this.selectOptions).selected(this.selectIndex).value(
-                        this.animTypes[Int64(this.selectIndex)].value).backgroundColor(0x3dc49d).onSelect(
-                        {
-                            index: Int32, text: String =>
-                            this.selectIndex = index
-                            this.controller.setItemAnimation(this.animTypes[Int64(index)].enumType)
-                        }
-                    )
-                }.width(70.percent).height(50).backgroundColor(0x3dc49d)
+                        justifyContent: FlexAlign.Start)) {
+                                            Text(content)
+                    .fontWeight(FontWeight.Bold)
+                    .bindMenu(builder: this.MyMenu)
+                    .id("ItemAnimator")
+                }
+                    .width(70.percent)
+                    .height(50)
+                    .backgroundColor(0x3dc49d)
 
                 Row() {
-                    Text('ADD').fontSize(18).padding(8).onClick(
-                        {
-                            event =>
-                                this.addFlag += 1
-                                this.controller.addValue(0, "add_${valIndex}")
-                                this.listDataTailFlag += 1
-                                this.valIndex ++
-                        }
-                    )
-                    Text('DEL').fontSize(18).padding(8).onClick(
-                        {
-                            event =>
-                            let deleteIndex: Int64 = 0;
-                            if (this.listDataTailFlag >= deleteIndex) {
-                                this.controller.deleteValue(0);
-                                this.listDataTailFlag -= 1
+                    Text('ADD')
+                        .fontSize(18)
+                        .padding(8)
+                        .onClick(
+                            {
+                                event =>
+                                    this.addFlag += 1
+                                    this
+                                        .controller
+                                        .addValue(0, "add_${valIndex}")
+                                    this.listDataTailFlag += 1
+                                    this.valIndex++
                             }
-                        }
-                    )
-                }.width(100.percent).height(50).backgroundColor(0x3dc49d)
-            }.width(100.percent).height(100.percent)
+                        )
+                        .id("add")
+                    Text('DEL')
+                        .fontSize(18)
+                        .padding(8)
+                        .onClick(
+                            {
+                                event =>
+                                    let deleteIndex: Int64 = 0;
+                                    if (this.listDataTailFlag >= deleteIndex) {
+                                        this
+                                            .controller
+                                            .deleteValue(0);
+                                        this.listDataTailFlag -= 1
+                                    }
+                            }
+                        )
+                        .id("del")
+                }
+                    .width(100.percent)
+                    .height(50)
+                    .backgroundColor(0x3dc49d)
+            }
+                .width(100.percent)
+                .height(100.percent)
             Column() {
                 RecyclerView(
                     array: this.listDatas,
@@ -137,13 +597,14 @@ class IndexItemAnimator {
     @Builder
     func SpecificChild(itemData: String) {
         Column() {
-            Image(@r(app.media.sample13)).width(100.percent).height(100)
-            Text(itemData + '').fontSize(20).textAlign(TextAlign.Center).width(100.percent)
-        }.margin(asddd(itemData))
-    }
-
-    func asddd(itemData: String):Int64 {
-        return 10
+            Image(@r(app.media.sample13))
+                .width(100.percent)
+                .height(100)
+            Text(itemData + '')
+                .fontSize(20)
+                .textAlign(TextAlign.Center)
+                .width(100.percent)
+        }.margin(10)
     }
 }
 
