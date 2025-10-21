@@ -96,7 +96,7 @@ class IndexItemAnimator {
     }
 
     @Builder
-    func MyMenu() {
+    func MyMenu1() {
         Menu() {
             MenuItem(
                 startIcon: "",
@@ -115,7 +115,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[0]
                                     .enumType)
-                            content = this
+                            content1 = this
                                 .animTypes[0]
                                 .value
                     }
@@ -140,7 +140,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[1]
                                     .enumType)
-                            content = this
+                            content1 = this
                                 .animTypes[1]
                                 .value
                     }
@@ -165,7 +165,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[2]
                                     .enumType)
-                            content = this
+                            content1 = this
                                 .animTypes[2]
                                 .value
                     }
@@ -190,7 +190,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[3]
                                     .enumType)
-                            content = this
+                            content1 = this
                                 .animTypes[3]
                                 .value
                     }
@@ -215,7 +215,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[4]
                                     .enumType)
-                            content = this
+                            content1 = this
                                 .animTypes[4]
                                 .value
                     }
@@ -240,7 +240,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[5]
                                     .enumType)
-                            content = this
+                            content1 = this
                                 .animTypes[5]
                                 .value
                     }
@@ -265,7 +265,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[6]
                                     .enumType)
-                            content = this
+                            content1 = this
                                 .animTypes[6]
                                 .value
                     }
@@ -290,7 +290,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[7]
                                     .enumType)
-                            content = this
+                            content1 = this
                                 .animTypes[7]
                                 .value
                     }
@@ -315,7 +315,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[8]
                                     .enumType)
-                            content = this
+                            content1 = this
                                 .animTypes[8]
                                 .value
                     }
@@ -340,7 +340,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[9]
                                     .enumType)
-                            content = this
+                            content1 = this
                                 .animTypes[9]
                                 .value
                     }
@@ -365,7 +365,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[10]
                                     .enumType)
-                            content = this
+                            content1 = this
                                 .animTypes[10]
                                 .value
                     }
@@ -373,6 +373,12 @@ class IndexItemAnimator {
                 .id(this
                     .animTypes[10]
                     .value)
+        }
+    }
+
+    @Builder
+    func MyMenu2() {
+        Menu() {
             MenuItem(
                 startIcon: "",
                 content: this
@@ -390,7 +396,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[11]
                                     .enumType)
-                            content = this
+                            content2 = this
                                 .animTypes[11]
                                 .value
                     }
@@ -415,7 +421,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[12]
                                     .enumType)
-                            content = this
+                            content2 = this
                                 .animTypes[12]
                                 .value
                     }
@@ -440,7 +446,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[13]
                                     .enumType)
-                            content = this
+                            content2 = this
                                 .animTypes[13]
                                 .value
                     }
@@ -465,7 +471,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[14]
                                     .enumType)
-                            content = this
+                            content2 = this
                                 .animTypes[14]
                                 .value
                     }
@@ -490,7 +496,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[15]
                                     .enumType)
-                            content = this
+                            content2 = this
                                 .animTypes[15]
                                 .value
                     }
@@ -515,7 +521,7 @@ class IndexItemAnimator {
                                 .setItemAnimation(this
                                     .animTypes[16]
                                     .enumType)
-                            content = this
+                            content2 = this
                                 .animTypes[16]
                                 .value
                     }
@@ -523,11 +529,13 @@ class IndexItemAnimator {
                 .id(this
                     .animTypes[16]
                     .value)
-        }.id("menu")
+        }
     }
 
     @State
-    var content: String = "FadeIn"
+    var content1: String = "FadeIn"
+    @State
+    var content2: String = "SlideInLeft"
 
     func build() {
         Stack(Alignment.Top) {
@@ -535,10 +543,14 @@ class IndexItemAnimator {
                 Flex(
                     FlexParams(direction: FlexDirection.Row, alignItems: ItemAlign.Center,
                         justifyContent: FlexAlign.Start)) {
-                                            Text(content)
-                    .fontWeight(FontWeight.Bold)
-                    .bindMenu(builder: this.MyMenu)
-                    .id("ItemAnimator")
+                    Text(content1)
+                        .fontWeight(FontWeight.Bold)
+                        .bindMenu(builder: this.MyMenu1)
+                        .id("ItemAnimator1")
+                    Text(content2)
+                        .fontWeight(FontWeight.Bold)
+                        .bindMenu(builder: this.MyMenu2)
+                        .id("ItemAnimator2")
                 }
                     .width(70.percent)
                     .height(50)
