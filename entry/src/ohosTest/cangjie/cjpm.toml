@@ -1,5 +1,5 @@
 [package]
-  compile-option = "--dy-std --coverage"
+  compile-option = "--dy-std"
   name = "ohos_app_cangjie_entry_test"
   description = "CangjieUI Application"
   output-type = "dynamic"
@@ -35,3 +35,5 @@
   [dependencies.ohos_app_cangjie_entry]
     path = "../../../"
     version = "1.0.0"
+  [dependencies.recyclerview]
+    path = "${cangjie_tpc_recyclerview}"

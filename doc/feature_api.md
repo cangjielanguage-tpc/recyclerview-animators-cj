@@ -1,6 +1,8 @@
-# RecyclerViewAnimators API
+# recyclerview-animators-cj 特性文档
 
-## UI使用接口
+## 介绍
+
+recyclerview-animators-cj 是一个带有添加删除动画效果以及整体动画效果的list组件库
 
 ### class RecyclerView
 
@@ -92,19 +94,16 @@ public class Controller {
      *
      * @return 条目动画类型
      */
-    public func getItemAnimation()
+    public func getItemAnimation(): ItemAnimationType
 
     /**
      * 获取适配器动画类型
      *
      * @return 适配器动画类型
      */
-    public func getAdapterAnimation()
+    public func getAdapterAnimation(): AdapterAnimationType
 }
 ```
-
-enum ItemAnimationType
-ItemAnimationType枚举定义了条目动画的类型。
 
 ```cangjie
 /**

@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "recyclerview-animators",
+        "License": " Apache 2.0 ",
+        "License File": "LICENSE",
+        "Version Number": "0.0.1 ",
+        "Owner": "wasabeef"
+        "Upstream URL": "https://github.com/wasabeef/recyclerview-animators",
+        "Description": "RecyclerView Animators is an Android library that allows developers to easily create RecyclerView with animations."
+    }
+]

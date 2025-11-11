@@ -42,20 +42,16 @@ class SlideInUpAnimator {
             index: Int64 => this.deleteValue(index);
         }
 
-        for (idx in 0..this
-                .array
-                .size) {
+        for (idx in 0..this.array.size) {
             let newArr = ArrayType(false, this.array[idx]);
-            this
-                .myArr
-                .append(newArr)
+            this.myArr.append(newArr)
         }
         for (i in 0..this.columnsNum) {
             this.colNumStr += '1fr '
         }
     }
 
-    public func addValue(index: Int64, value: String) {
+    public func addValue(index: Int64, value: String): Unit {
         if (0 > index) {
             return
         }
@@ -98,7 +94,7 @@ class SlideInUpAnimator {
         }
     }
 
-    public func deleteValue(index: Int64) {
+    public func deleteValue(index: Int64): Unit {
         if (!this.isClick) {
             return
         }

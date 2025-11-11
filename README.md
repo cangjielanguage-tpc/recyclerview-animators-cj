@@ -1,17 +1,18 @@
 <div align="center">
-<h1>RecyclerViewAnimators4cj</h1>
+<h1>recyclerview-animators-cj</h1>
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v0.0.1-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.0.0-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v0.56.4-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v1.0.3-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjcov-94.9-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
 
 ## 介绍
 
-RecyclerViewAnimators4cj 是基于Android 动画库 [recyclerview-animators](https://github.com/wasabeef/recyclerview-animators) 的 Cangjie 移植版本，用于添加动画效果。
+recyclerview-animators-cj 是一个带有添加删除动画效果以及整体动画效果的list组件库
 
 ### 特性
 
@@ -154,9 +155,7 @@ class TestExample {
 
 在下述版本验证通过：
 
-    DevEco Studio (5.0.9.100) 
-    Cangjie Support Plugin 5.0.9.100
-    Cangjie Compiler: 0.53.18
+    DevEco Studio 5.1.1 Release(5.1.1.840)
 
 ## 开源协议
 

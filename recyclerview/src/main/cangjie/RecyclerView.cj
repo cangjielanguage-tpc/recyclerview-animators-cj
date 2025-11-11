@@ -344,45 +344,45 @@ public class Controller {
     public var mWidth: Float64 = 480.0;
     public var mHeight: Float64 = 855.0;
 
-    public func addValue(index: Int64, value: String) {
+    public func addValue(index: Int64, value: String): Unit {
         this.addValueCallback(index, value)
     }
 
-    public func deleteValue(index: Int64) {
+    public func deleteValue(index: Int64): Unit {
         this.deleteValueCallback(index)
     }
 
-    public func setDuration(duration: Int32) {
+    public func setDuration(duration: Int32): Unit {
         this.duration = duration
     }
 
-    public func setItemAnimation(itemAnimation: ItemAnimationType) {
+    public func setItemAnimation(itemAnimation: ItemAnimationType): Unit {
         this.itemAnimation = itemAnimation
     }
 
-    public func setAdapterAnimation(adapterAnimation: AdapterAnimationType) {
+    public func setAdapterAnimation(adapterAnimation: AdapterAnimationType): Unit {
         this.adapterAnimation = adapterAnimation
     }
 
-    public func setFirstOnly(isFirstOnly: Bool) {
+    public func setFirstOnly(isFirstOnly: Bool): Unit {
         this.isFirstOnly = isFirstOnly
     }
 
-    public func setMovingWidth(width: Float64) {
+    public func setMovingWidth(width: Float64): Controller {
         this.mWidth = width
         return this
     }
 
-    public func setMovingHeight(height: Float64) {
+    public func setMovingHeight(height: Float64): Controller {
         this.mHeight = height
         return this
     }
 
-    public func getItemAnimation() {
+    public func getItemAnimation(): ItemAnimationType {
         return this.itemAnimation
     }
 
-    public func getAdapterAnimation() {
+    public func getAdapterAnimation(): AdapterAnimationType {
         return this.adapterAnimation
     }
 }

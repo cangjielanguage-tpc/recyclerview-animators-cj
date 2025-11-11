@@ -17,7 +17,7 @@ import ohos.resource_manager.__GenerateResource__
 @Entry
 @Component
 class IndexItemAnimator {
-    var listDatas: ObservedArrayList<String> = ObservedArrayList<String>();
+    var listDatas: ObservedArrayList<String> = ObservedArrayList<String>(["hello", "recycle", "nihao", "cangjie", "world"]);
     private var selectOptions: Array<SelectOption> = ArrayList<SelectOption>(
         [
             SelectOption('FadeIn', icon: @r(app.media.icon)),

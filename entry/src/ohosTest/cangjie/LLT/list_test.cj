@@ -1,6 +1,7 @@
 package ohos_app_cangjie_entry_test.LLT
 
 import ohos_app_cangjie_entry_test.unittest_support.registerTestSuite
+internal import recyclerview.*
 
 private let register = testsuite()
 

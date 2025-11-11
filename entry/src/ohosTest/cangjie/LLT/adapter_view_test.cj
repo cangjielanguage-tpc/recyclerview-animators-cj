@@ -4,11 +4,6 @@ import std.unittest.*
 import std.unittest.common.*
 import std.unittest.testmacro.*
 import ohos.ui_test.*
-import std.fs.*
-import std.fs.File as File1
-import std.io.*
-import std.core.*
-import ohos.file_fs.*
 
 @Test
 class AdapterViewTest {

@@ -43,13 +43,9 @@ class ScaleInAnimator {
             index: Int64 => this.deleteValue(index);
         }
 
-        for (idx in 0..this
-                .array
-                .size) {
+        for (idx in 0..this.array.size) {
             let newArr = ArrayType(false, this.array[idx]);
-            this
-                .myArr
-                .append(newArr)
+            this.myArr.append(newArr)
         }
         AppLog.info("myarr size:" + this
             .myArr

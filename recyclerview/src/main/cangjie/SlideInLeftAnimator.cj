@@ -45,13 +45,9 @@ class SlideInLeftAnimator {
             index: Int64 => this.deleteValue(index);
         }
 
-        for (idx in 0..this
-                .array
-                .size) {
+        for (idx in 0..this.array.size) {
             let newArr = ArrayType(false, this.array[idx]);
-            this
-                .myArr
-                .append(newArr)
+            this.myArr.append(newArr)
         }
         for (i in 0..this.columnsNum) {
             this.colNumStr += '1fr '
