@@ -36,7 +36,6 @@ recyclerview-animators-cj 是一个带有添加删除动画效果以及整体动
 │  └─src
 │      └─main
 │          ├─cangjie
-│          │  └─src
 │          └─resources
 └─hvigor
 
@@ -81,21 +80,16 @@ recyclerview-animators-cj 是一个带有添加删除动画效果以及整体动
          }
        }
        ```
-    4. 修改自身应用 entry/src/main/cangjie 下的 cjpm.toml 文件，在 [dependencies] 字段下添加
+    4. 修改自身应用 entry 下的 cjpm.toml 文件，在 [dependencies] 字段下添加
         ``` toml
         [dependencies.recyclerview]
-          path = "../../../../recyclerview/src/main/cangjie"
-          version = "1.0.0"
+          path = "../recyclerview"
         ```
        toml变为
         ``` toml
         [dependencies]
-          [dependencies.cj_res_entry]
-            path = "./cj_res"
-            version = "1.0.0"
           [dependencies.recyclerview]
-            path = "../../../../recyclerview/src/main/cangjie"
-            version = "1.0.0"
+            path = "../recyclerview"
         ```
     5. 在项目中使用 import recyclerview.* 引用该项目
        ```cangjie
