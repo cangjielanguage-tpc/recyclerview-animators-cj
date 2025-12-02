@@ -387,25 +387,6 @@ public class Controller {
     }
 }
 
-public class ArrayType <: ToString {
-    public var isNewValue: Bool
-    public var value: String
-
-    public init(isNewValue: Bool, value: String) {
-        this.isNewValue = isNewValue
-        this.value = value
-    }
-
-    public init(that: ArrayType) {
-        this.isNewValue = that.isNewValue
-        this.value = that.value
-    }
-
-    public override func toString():String {
-        return value
-    }
-}
-
 public class AnimationAdapterTypeData {
     public var animationAdapterKey: Float64
     public var value: String

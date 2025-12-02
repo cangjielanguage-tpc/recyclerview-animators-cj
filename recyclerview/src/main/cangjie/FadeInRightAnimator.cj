@@ -44,7 +44,7 @@ class FadeInRightAnimator {
         }
 
         for (idx in 0..this.array.size) {
-            let newArr = ArrayType(false, this.array[idx]);
+            let newArr = ArrayType(isNewValue: false, value: this.array[idx]);
             this.myArr.append(newArr)
         }
         for (i in 0..this.columnsNum) {
@@ -60,7 +60,7 @@ class FadeInRightAnimator {
             return
         }
         this.isClick = false
-        let newArr = ArrayType(true, value);
+        let newArr = ArrayType(isNewValue: true, value: value);
         this.trans = 0
         this.duration = 0
         this.offsetX = 50
@@ -70,7 +70,7 @@ class FadeInRightAnimator {
 
         Timer.once(200 * Duration.millisecond) {
             =>
-                let newArr = ArrayType(true, value)
+                let newArr = ArrayType(isNewValue: true, value: value)
                 this.trans = 1
                 this.offsetX = 0
                 this.duration = this
@@ -107,24 +107,32 @@ class FadeInRightAnimator {
             return
         }
         this.isClick = false
-        let currentData = ArrayType(this.myArr[index])
+        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
         currentData.isNewValue = true
-        this.trans = 0
-        this.duration = this
-            .controller
-            .duration
-        this.offsetX = 50
+        this.trans = 1
+        this.duration = 0
+        this.offsetX = 0
         this.myArr[index] = currentData
 
-        Timer.once(Int64(this
-            .controller
-            .duration) * Duration.millisecond) {
+        Timer.once(100 * Duration.millisecond) {
             =>
-                this.duration = 0
-                this
-                    .myArr
-                    .remove(index)
-                this.isClick = true
+                this.trans = 0
+                this.offsetX = 50
+                this.duration = this
+                    .controller
+                    .duration
+                this.myArr[index] = currentData
+
+                Timer.once(Int64(this
+                    .controller
+                    .duration + 100) * Duration.millisecond) {
+                    =>
+                        this.duration = 0
+                        this
+                            .myArr
+                            .remove(index)
+                        this.isClick = true
+                }
         }
     }
 
@@ -132,8 +140,8 @@ class FadeInRightAnimator {
         Grid() {
             ForEach(
                 this.myArr,
-                {
-                    item: ArrayType, _: Int64 => GridItem() {
+                itemGeneratorFunc: {
+                    item: ArrayType, index: Int64 => GridItem() {
                         child(item.value)
                     }
                         .animationStart(
@@ -159,7 +167,8 @@ class FadeInRightAnimator {
                             y: 0
                         )
                         .animationEnd()
-                }
+                },
+                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
             )
         }
             .columnsTemplate(this.colNumStr)

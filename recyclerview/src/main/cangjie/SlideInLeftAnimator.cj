@@ -46,7 +46,7 @@ class SlideInLeftAnimator {
         }
 
         for (idx in 0..this.array.size) {
-            let newArr = ArrayType(false, this.array[idx]);
+            let newArr = ArrayType(isNewValue: false, value: this.array[idx]);
             this.myArr.append(newArr)
         }
         for (i in 0..this.columnsNum) {
@@ -62,7 +62,7 @@ class SlideInLeftAnimator {
             return
         }
         this.isClick = false
-        let newArr = ArrayType(true, value);
+        let newArr = ArrayType(isNewValue: true, value: value);
         this.trans = 1
         this.duration = 0
         this.x = (-100).percent
@@ -72,7 +72,7 @@ class SlideInLeftAnimator {
             .insert(index, newArr)
         Timer.once(200 * Duration.millisecond) {
             =>
-                let newArr = ArrayType(true, value)
+                let newArr = ArrayType(isNewValue: true, value: value)
                 this.trans = 1
                 this.duration = this
                     .controller
@@ -110,17 +110,24 @@ class SlideInLeftAnimator {
             return
         }
         this.isClick = false
-        let currentData = ArrayType(this.myArr[index])
+        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
         currentData.isNewValue = true
 
-        this.x = (-100).percent
+        this.x = 0.percent
         this.y = 0.percent
         this.trans = 1
-        this.duration = this
-            .controller
-            .duration
+        this.duration = 0
         this.myArr[index] = currentData
 
+        Timer.once(200 * Duration.millisecond) {
+            this.x = (-100).percent
+            this.y = 0.percent
+            this.trans = 1
+            this.duration = this
+                .controller
+                .duration
+            this.myArr[index] = currentData
+        }
         Timer.once(Int64(this
             .controller
             .duration + 100) * Duration.millisecond) {
@@ -138,8 +145,8 @@ class SlideInLeftAnimator {
         Grid {
             ForEach(
                 this.myArr,
-                {
-                    item: ArrayType, _: Int64 => GridItem() {
+                itemGeneratorFunc: {
+                    item: ArrayType, index: Int64 => GridItem() {
                         child(item.value)
                     }
                         .animationStart(
@@ -169,7 +176,8 @@ class SlideInLeftAnimator {
                             })
                         )
                         .animationEnd()
-                }
+                },
+                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
             )
         }
             .columnsTemplate(this.colNumStr)

@@ -46,7 +46,7 @@ class SlideInDownAnimator {
         }
 
         for (idx in 0..this.array.size) {
-            let newArr = ArrayType(false, this.array[idx]);
+            let newArr = ArrayType(isNewValue: false, value: this.array[idx]);
             this.myArr.append(newArr)
         }
         for (i in 0..this.columnsNum) {
@@ -62,7 +62,7 @@ class SlideInDownAnimator {
             return
         }
         this.isClick = false
-        let newArr = ArrayType(true, value);
+        let newArr = ArrayType(isNewValue: true, value: value);
         this.trans = 0
         this.duration = 0
         this.x = (0).percent
@@ -73,7 +73,7 @@ class SlideInDownAnimator {
 
         Timer.once(200 * Duration.millisecond) {
             =>
-                let newArr = ArrayType(true, value)
+                let newArr = ArrayType(isNewValue: true, value: value)
                 this.trans = 1
                 this.duration = this
                     .controller
@@ -112,7 +112,7 @@ class SlideInDownAnimator {
         }
         this.isClick = false
 
-        let currentData = ArrayType(this.myArr[index])
+        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
 
         currentData.isNewValue = true
 
@@ -145,7 +145,7 @@ class SlideInDownAnimator {
         Grid {
             ForEach(
                 this.myArr,
-                {
+                itemGeneratorFunc: {
                     item: ArrayType, _: Int64 => GridItem() {
                         child(item.value)
                     }
@@ -176,7 +176,8 @@ class SlideInDownAnimator {
                             })
                         )
                         .animationEnd()
-                }
+                },
+                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
             )
         }
             .columnsTemplate(this.colNumStr)
