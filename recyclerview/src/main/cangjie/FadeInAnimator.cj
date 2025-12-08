@@ -29,33 +29,33 @@ class FadeInAnimator {
     var colNumStr: String = '';
 
     protected override func aboutToAppear() {
-        this
-            .controller
+        controller
             .addValueCallback = {
             index: Int64, value: String => this.addValue(index, value);
         }
 
-        this
-            .controller
+        controller
             .deleteValueCallback = {
             index: Int64 => this.deleteValue(index);
         }
 
-        for (idx in 0..this.array.size) {
-            let newArr = ArrayType(isNewValue: false, value: this.array[idx]);
-            this.myArr.append(newArr)
+        for (idx in 0..array.size) {
+            let newArr = ArrayType(isNewValue: false, value: array[idx]);
+            myArr.append(newArr)
         }
-        for (i in 0..this.columnsNum) {
-            this.colNumStr += '1fr '
+
+        for (i in 0..columnsNum) {
+            colNumStr += '1fr '
         }
     }
 
     public func addValue(index: Int64, value: String): Unit {
+
         if (0 > index) {
             return
         }
         AppLog.info("FadeInAnimator add index: " + index.toString() + ", value:" + value)
-        if (!this.isClick) {
+        if (!isClick) {
             return
         }
         this.isClick = false
@@ -74,18 +74,12 @@ class FadeInAnimator {
                     .duration
                 this.myArr[index] = newArr2
 
-                Timer.once(Int64(this
-                    .controller
-                    .duration) * Duration.millisecond) {
+                Timer.once(Int64(controller.duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
-                                .myArr
-                                .size) {
-                            this
-                                .myArr[idx]
-                                .isNewValue = false
+                        for (idx in 0..myArr.size) {
+                            myArr[idx].isNewValue = false
                         }
-                        this.isClick = true
+                        isClick = true
                 }
         }
     }
@@ -94,19 +88,18 @@ class FadeInAnimator {
         if (0 > index) {
             return
         }
-        if (!this.isClick) {
+
+        if (!isClick) {
             return
         }
-        if (index >= this
-            .myArr
-            .size) {
+        if (index >= myArr.size) {
             return
         }
         this.isClick = false
         let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
         currentData.isNewValue = true
         this.duration = 0
-        this.trans = 1
+        trans = 1
         this.duration = this
             .controller
             .duration
@@ -118,7 +111,7 @@ class FadeInAnimator {
                 this.duration = this
                     .controller
                     .duration
-                this.myArr[index] = currentData
+                myArr[index] = currentData
 
                 Timer.once(Int64(this
                     .controller
@@ -128,7 +121,7 @@ class FadeInAnimator {
                         this
                             .myArr
                             .remove(index)
-                        this.isClick = true
+                        isClick = true
                 }
         }
     }
@@ -136,14 +129,14 @@ class FadeInAnimator {
     func build() {
         Grid {
             ForEach(
-                this.myArr,
+                myArr,
                 itemGeneratorFunc: {
                     item: ArrayType, index: Int64 => GridItem {
                         child(item.value)
                     }
                         .animationStart(
                             AnimateParam(
-                                duration: this.duration,
+                                duration: duration,
                                 curve: Curve.Ease,
                                 delay: 50, // 动画延迟
                                 iterations: 1, // 播放次数
@@ -151,7 +144,7 @@ class FadeInAnimator {
                             )
                         )
                         .opacity(if (item.isNewValue) {
-                            this.trans
+                            trans
                         } else {
                             1
                         })

@@ -16,38 +16,38 @@ class SlideInBottomAnimationAdapter {
     @Link
     var controller: Controller = Controller();
     @State
+    var end: Int32 = 0;
+    @State
     var list: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
     @State
     var animateList: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
     @State
     var start: Int32 = 0;
-    @State
-    var end: Int32 = 0;
 
     protected override func aboutToAppear() {
         for (idx in 0..this.array.size) {
-            let temp = AnimationAdapterTypeData(this.controller.mHeight, this.array[idx]);
-            this.list.append(temp)
+            let temp = AnimationAdapterTypeData(controller.mHeight, this.array[idx]);
             this.animateList.append(temp)
+            list.append(temp)
         }
     }
 
     func build() {
         List {
             ForEach(
-                this.list,
+                list,
                 {
-                    item: AnimationAdapterTypeData, index: Int64 => ListItem() {
+                    item: AnimationAdapterTypeData, index1: Int64 => ListItem() {
                         child(item.value)
                     }.width(100.percent).animationStart(
                         AnimateParam(
-                            duration: this.controller.duration,
+                            duration: controller.duration,
                             curve: Curve.Ease,
                             delay: 50, // 动画延迟
                             iterations: 1, // 播放次数
                             playMode: PlayMode.Normal
                         )
-                    ).translate(y: this.animateList[index].animationAdapterKey)
+                    ).translate(y: animateList[index1].animationAdapterKey)
                     .animationEnd()
                 }
             )
@@ -56,13 +56,13 @@ class SlideInBottomAnimationAdapter {
                 start: Int32, end: Int32 =>
                 this.start = start
                 this.end = end
-                for (index in 0..this.animateList.size) {
+                for (index in 0..animateList.size) {
                     var item = animateList[index]
                     if (index >= Int64(start) && index <= Int64(end)) {
                         let temp = AnimationAdapterTypeData(0.0, item.value);
-                        this.animateList[index] = temp
+                        animateList[index] = temp
                     } else {
-                        if (!this.controller.isFirstOnly) {
+                        if (!controller.isFirstOnly) {
                             let temp = AnimationAdapterTypeData(this.controller.mHeight, item.value);
                             this.animateList[index] = temp
                         }

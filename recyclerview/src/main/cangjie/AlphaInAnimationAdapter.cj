@@ -16,19 +16,19 @@ class AlphaInAnimationAdapter {
     @Link
     var controller: Controller = Controller();
     @State
-    var list: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
-    @State
-    var animateList: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
+    var end: Int32 = 0;
     @State
     var start: Int32 = 0;
     @State
-    var end: Int32 = 0;
+    var list: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
+    @State
+    var animateList: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
 
     protected override func aboutToAppear() {
         for (idx in 0..this.array.size) {
-            let temp = AnimationAdapterTypeData(0.0, this.array[idx]);
+            let temp = AnimationAdapterTypeData(0.0, array[idx]);
+            animateList.append(temp)
             this.list.append(temp)
-            this.animateList.append(temp)
         }
     }
 
@@ -52,12 +52,12 @@ class AlphaInAnimationAdapter {
             )
         }.width(100.percent).onScrollIndex(
             {
-                start: Int32, end: Int32 =>
-                this.start = start
-                this.end = end
+                start1: Int32, end1: Int32 =>
+                this.start = start1
+                this.end = end1
                 for (index in 0..this.animateList.size) {
                     var item = animateList[index]
-                    if (index >= Int64(start) && index <= Int64(end)) {
+                    if (index >= Int64(start1) && index <= Int64(end1)) {
                         let temp = AnimationAdapterTypeData(1.0, item.value);
                         this.animateList[index] = temp
                     } else {

@@ -16,19 +16,19 @@ class ScaleInAnimationAdapter {
     @Link
     var controller: Controller = Controller();
     @State
-    var list: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
-    @State
-    var animateList: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
-    @State
     var start: Int32 = 0;
     @State
+    var list: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
+    @State
     var end: Int32 = 0;
+    @State
+    var animateList: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
 
     protected override func aboutToAppear() {
         for (idx in 0..this.array.size) {
             let temp = AnimationAdapterTypeData(0.0, this.array[idx]);
             this.list.append(temp)
-            this.animateList.append(temp)
+            animateList.append(temp)
         }
     }
 
@@ -57,18 +57,18 @@ class ScaleInAnimationAdapter {
             )
         }.width(100.percent).onScrollIndex(
             {
-                start: Int32, end: Int32 =>
+                start: Int32, end1: Int32 =>
                 this.start = start
-                this.end = end
+                this.end = end1
                 for (index in 0..this.animateList.size) {
                     var item = animateList[index]
-                    if (index >= Int64(start) && index <= Int64(end)) {
+                    if (index >= Int64(start) && index <= Int64(end1)) {
                         let temp = AnimationAdapterTypeData(1.0, item.value);
-                        this.animateList[index] = temp
+                        animateList[index] = temp
                     } else {
-                        if (!this.controller.isFirstOnly) {
+                        if (!controller.isFirstOnly) {
                             let temp = AnimationAdapterTypeData(0.0, item.value);
-                            this.animateList[index] = temp
+                            animateList[index] = temp
                         }
                     }
                 }

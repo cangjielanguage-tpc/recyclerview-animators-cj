@@ -34,20 +34,20 @@ class FadeInDownAnimator {
         this
             .controller
             .addValueCallback = {
-            index: Int64, value: String => this.addValue(index, value);
+            index: Int64, value: String => addValue(index, value);
         }
 
         this
             .controller
             .deleteValueCallback = {
-            index: Int64 => this.deleteValue(index);
+            index: Int64 => deleteValue(index);
         }
 
-        for (idx in 0..this.array.size) {
+        for (idx in 0..array.size) {
             let newArr = ArrayType(isNewValue: false, value: this.array[idx]);
             this.myArr.append(newArr)
         }
-        for (i in 0..this.columnsNum) {
+        for (i in 0..columnsNum) {
             this.colNumStr += '1fr '
         }
     }
@@ -56,14 +56,15 @@ class FadeInDownAnimator {
         if (0 > index) {
             return
         }
+
         if (!this.isClick) {
             return
         }
-        this.isClick = false
+        isClick = false
         let newArr = ArrayType(isNewValue: true, value: value);
         this.trans = 0
         this.duration = 0
-        this.offsetY = -30
+        offsetY = -30
         this
             .myArr
             .insert(index, newArr)
@@ -74,7 +75,7 @@ class FadeInDownAnimator {
                 this.duration = this
                     .controller
                     .duration
-                this.offsetY = 0
+                offsetY = 0
                 this.myArr[index] = newArr
                 Timer.once(Int64(this
                     .controller
@@ -87,7 +88,7 @@ class FadeInDownAnimator {
                                 .myArr[idx]
                                 .isNewValue = false
                         }
-                        this.isClick = true
+                        isClick = true
                 }
         }
     }
@@ -97,7 +98,7 @@ class FadeInDownAnimator {
             return
         }
         AppLog.info(" delete index: " + index.toString())
-        if (!this.isClick) {
+        if (!isClick) {
             return
         }
         if (index >= this
@@ -106,9 +107,9 @@ class FadeInDownAnimator {
             return
         }
         this.isClick = false
-        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
+        let currentData = ArrayType(isNewValue: myArr[index].isNewValue, value: this.myArr[index].value)
         currentData.isNewValue = true
-        this.duration = 0
+        duration = 0
         this.trans = 1
         this.offsetY = 0
         this.myArr[index] = currentData
@@ -120,7 +121,7 @@ class FadeInDownAnimator {
                 this.duration = this
                     .controller
                     .duration
-                this.myArr[index] = currentData
+                myArr[index] = currentData
 
                 Timer.once(Int64(this
                     .controller
@@ -130,7 +131,7 @@ class FadeInDownAnimator {
                         this
                             .myArr
                             .remove(index)
-                        this.isClick = true
+                        isClick = true
                 }
         }
     }
@@ -140,7 +141,7 @@ class FadeInDownAnimator {
             ForEach(
                 this.myArr,
                 itemGeneratorFunc: {
-                    item: ArrayType, index: Int64 => GridItem() {
+                    item: ArrayType, index0: Int64 => GridItem() {
                         child(item.value)
                     }
                         .animationStart(
@@ -160,7 +161,7 @@ class FadeInDownAnimator {
                         .offset(
                             x: 0,
                             y: (if (item.isNewValue) {
-                                this.offsetY
+                                offsetY
                             } else {
                                 0
                             })

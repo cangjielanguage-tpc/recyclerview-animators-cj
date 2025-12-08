@@ -18,14 +18,14 @@ class SlideInLeftAnimationAdapter {
     @State
     var list: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
     @State
+    var end: Int32 = 0;
+    @State
     var animateList: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
     @State
     var start: Int32 = 0;
-    @State
-    var end: Int32 = 0;
 
     protected override func aboutToAppear() {
-        for (idx in 0..this.array.size) {
+        for (idx in 0..array.size) {
             let temp = AnimationAdapterTypeData(-this.controller.mWidth, this.array[idx]);
             this.list.append(temp)
             this.animateList.append(temp)
@@ -55,12 +55,12 @@ class SlideInLeftAnimationAdapter {
             )
         }.width(100.percent).onScrollIndex(
             {
-                start: Int32, end: Int32 =>
+                start: Int32, end1: Int32 =>
                 this.start = start
-                this.end = end
-                for (index in 0..this.animateList.size) {
+                this.end = end1
+                for (index in 0..animateList.size) {
                     var item = animateList[index]
-                    if (index >= Int64(start) && index <= Int64(end)) {
+                    if (index >= Int64(start) && index <= Int64(end1)) {
                         let temp = AnimationAdapterTypeData(0.0, item.value);
                         this.animateList[index] = temp
                     } else {

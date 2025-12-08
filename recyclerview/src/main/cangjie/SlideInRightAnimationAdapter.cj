@@ -13,6 +13,8 @@ class SlideInRightAnimationAdapter {
     var array: ObservedArrayList<String> = ObservedArrayList<String>();
     @BuilderParam
     var child: (String) -> Unit
+    @State
+    var start: Int32 = 0;
     @Link
     var controller: Controller = Controller();
     @State
@@ -20,14 +22,12 @@ class SlideInRightAnimationAdapter {
     @State
     var animateList: ObservedArrayList<AnimationAdapterTypeData> = ObservedArrayList<AnimationAdapterTypeData>();
     @State
-    var start: Int32 = 0;
-    @State
     var end: Int32 = 0;
 
     protected override func aboutToAppear() {
         for (idx in 0..this.array.size) {
             let temp = AnimationAdapterTypeData(this.controller.mWidth, this.array[idx]);
-            this.list.append(temp)
+            list.append(temp)
             this.animateList.append(temp)
         }
     }
@@ -37,7 +37,7 @@ class SlideInRightAnimationAdapter {
             ForEach(
                 this.list,
                 {
-                    item: AnimationAdapterTypeData, index: Int64 => ListItem() {
+                    item: AnimationAdapterTypeData, index0: Int64 => ListItem() {
                         child(item.value)
                     }.width(100.percent).animationStart(
                         AnimateParam(
@@ -47,7 +47,7 @@ class SlideInRightAnimationAdapter {
                             iterations: 1, // 播放次数
                             playMode: PlayMode.Normal
                         )
-                    ).translate(x: this.animateList[index].animationAdapterKey).animationEnd()
+                    ).translate(x: animateList[index0].animationAdapterKey).animationEnd()
                 }
             )
         }.width(100.percent).onScrollIndex(
