@@ -22,25 +22,25 @@ class ScaleInAnimator {
     @State
     var duration: Int32 = 0;
     var isClick: Bool = true;
-    @State
-    var trans: Int64 = 0;
-    @State
-    var landing: Float32 = 1.0
     @Link
     var columnsNum: Int64 = 1;
+    @State
+    var trans: Int64 = 0;
     var colNumStr: String = '';
+    @State
+    var landing: Float32 = 1.0
 
     protected override func aboutToAppear() {
         this
             .controller
             .addValueCallback = {
-            index: Int64, value: String => this.addValue(index, value);
+            indexScaleIn: Int64, value: String => this.addValue(indexScaleIn, value);
         }
 
         this
             .controller
             .deleteValueCallback = {
-            index: Int64 => this.deleteValue(index);
+            indexScaleIn: Int64 => this.deleteValue(indexScaleIn);
         }
 
         for (idx in 0..this.array.size) {
@@ -50,14 +50,14 @@ class ScaleInAnimator {
         AppLog.info("myarr size:" + this
             .myArr
             .size
-            .toString())
+            .toString());
         for (i in 0..this.columnsNum) {
             this.colNumStr += '1fr '
         }
     }
 
-    func addValue(index: Int64, value: String) {
-        if (0 > index) {
+    func addValue(indexScaleIn: Int64, value: String) {
+        if (0 > indexScaleIn) {
             return
         }
         if (!this.isClick) {
@@ -65,12 +65,12 @@ class ScaleInAnimator {
         }
         this.isClick = false
         let newArr = ArrayType(isNewValue: true, value: value);
-        this.trans = 0
-        this.duration = 0
+        this.trans = 0;
+        this.duration = 0;
         this.landing = 0.0
         this
             .myArr
-            .insert(index, newArr)
+            .insert(indexScaleIn, newArr)
         Timer.once(200 * Duration.millisecond) {
             =>
                 let newArr = ArrayType(isNewValue: true, value: value)
@@ -79,7 +79,7 @@ class ScaleInAnimator {
                 this.duration = this
                     .controller
                     .duration
-                this.myArr[index] = newArr
+                this.myArr[indexScaleIn] = newArr
                 Timer.once(Int64(this
                     .controller
                     .duration) * Duration.millisecond) {
@@ -89,39 +89,39 @@ class ScaleInAnimator {
                                 .size) {
                             this
                                 .myArr[idx]
-                                .isNewValue = false
+                                .isNewValue = false;
                         }
-                        this.isClick = true
+                        this.isClick = true;
                 }
         }
     }
 
-    func deleteValue(index: Int64) {
-        if (0 > index) {
+    func deleteValue(indexScaleIn: Int64) {
+        if (0 > indexScaleIn) {
             return
         }
         if (!this.isClick) {
             return
         }
-        if (index >= this
+        if (indexScaleIn >= this
             .myArr
             .size) {
             return
         }
         this.isClick = false
 
-        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
+        let currentData = ArrayType(isNewValue: this.myArr[indexScaleIn].isNewValue, value: this.myArr[indexScaleIn].value)
         currentData.isNewValue = true
         this.landing = 1.0
         this.trans = 1
         this.duration = 0
 
-        this.myArr[index] = currentData
+        this.myArr[indexScaleIn] = currentData
 
         Timer.once(100 * Duration.millisecond) {
             =>
                 this.landing = 0.0
-                this.trans = 0
+                this.trans = 0;
                 this.duration = this
                     .controller
                     .duration
@@ -130,10 +130,10 @@ class ScaleInAnimator {
                     .duration + 100) * Duration.millisecond) {
                     =>
                         this.duration = 0
-                        this.landing = 1.0
+                        this.landing = 1.0;
                         this
                             .myArr
-                            .remove(index)
+                            .remove(indexScaleIn)
                         this.isClick = true
                 }
         }
@@ -144,15 +144,15 @@ class ScaleInAnimator {
             ForEach(
                 this.myArr,
                 itemGeneratorFunc: {
-                    item: ArrayType, index: Int64 => GridItem() {
+                    item: ArrayType, indexScaleIn: Int64 => GridItem() {
                         child(item.value)
                     }
                         .animationStart(
                             AnimateParam(
-                                duration: this.duration,
-                                curve: Curve.Ease,
                                 delay: 50, // 动画延迟
                                 iterations: 1, // 播放次数
+                                duration: this.duration,
+                                curve: Curve.Ease,
                                 playMode: PlayMode.Normal
                             )
                         )
@@ -163,9 +163,9 @@ class ScaleInAnimator {
                         })
                         .scale(
                             x: (if (item.isNewValue) {
-                                this.landing
+                                this.landing;
                             } else {
-                                1.0
+                                1.0;
                             }),
                             y: (if (item.isNewValue) {
                                 this.landing
@@ -173,7 +173,7 @@ class ScaleInAnimator {
                                 1.0
                             }),
                             z: (if (item.isNewValue) {
-                                this.landing
+                                this.landing;
                             } else {
                                 1.0
                             }),
@@ -182,14 +182,14 @@ class ScaleInAnimator {
                         )
                         .animationEnd()
                 },
-                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
+                keyGeneratorFunc: {item: ArrayType, indexScaleIn: Int64 => "${item.toString()}${indexScaleIn}"}
             )
         }
-            .columnsTemplate(this.colNumStr)
             .columnsGap(2)
+            .columnsTemplate(this.colNumStr)
             .rowsGap(2)
             .onScrollIndex({
-                first: UInt32 => AppLog.info(first.toString())
+                firstScaleIn: UInt32 => AppLog.info(firstScaleIn.toString())
             })
             .width(100.percent)
     }

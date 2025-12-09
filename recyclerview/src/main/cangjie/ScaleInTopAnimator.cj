@@ -34,13 +34,13 @@ class ScaleInTopAnimator {
         this
             .controller
             .addValueCallback = {
-            index: Int64, value: String => this.addValue(index, value);
+            indexScaleInTop: Int64, value: String => this.addValue(indexScaleInTop, value);
         }
 
         this
             .controller
             .deleteValueCallback = {
-            index: Int64 => this.deleteValue(index);
+            indexScaleInTop: Int64 => this.deleteValue(indexScaleInTop);
         }
 
         for (idx in 0..this.array.size) {
@@ -52,8 +52,8 @@ class ScaleInTopAnimator {
         }
     }
 
-    func addValue(index: Int64, value: String) {
-        if (0 > index) {
+    func addValue(indexScaleInTop: Int64, value: String) {
+        if (0 > indexScaleInTop) {
             return
         }
         if (!this.isClick) {
@@ -66,7 +66,7 @@ class ScaleInTopAnimator {
         this.landing = 0.0
         this
             .myArr
-            .insert(index, newArr)
+            .insert(indexScaleInTop, newArr)
         Timer.once(200 * Duration.millisecond) {
             =>
                 let newArr = ArrayType(isNewValue: true, value: value)
@@ -75,7 +75,7 @@ class ScaleInTopAnimator {
                 this.duration = this
                     .controller
                     .duration
-                this.myArr[index] = newArr
+                this.myArr[indexScaleInTop] = newArr
                 Timer.once(Int64(this
                     .controller
                     .duration) * Duration.millisecond) {
@@ -92,26 +92,26 @@ class ScaleInTopAnimator {
         }
     }
 
-    func deleteValue(index: Int64) {
-        if (0 > index) {
+    func deleteValue(indexScaleInTop: Int64) {
+        if (0 > indexScaleInTop) {
             return
         }
         if (!this.isClick) {
             return
         }
-        if (index >= this
+        if (indexScaleInTop >= this
             .myArr
             .size) {
             return
         }
         this.isClick = false
 
-        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
+        let currentData = ArrayType(isNewValue: this.myArr[indexScaleInTop].isNewValue, value: this.myArr[indexScaleInTop].value)
         currentData.isNewValue = true
         this.landing = 1.0
         this.trans = 1
         this.duration = 0
-        this.myArr[index] = currentData
+        this.myArr[indexScaleInTop] = currentData
         Timer.once(100 * Duration.millisecond) {
             =>
                 this.landing = 0.0
@@ -127,7 +127,7 @@ class ScaleInTopAnimator {
                         this.landing = 1.0
                         this
                             .myArr
-                            .remove(index)
+                            .remove(indexScaleInTop)
                         this.isClick = true
                 }
         }
@@ -138,8 +138,8 @@ class ScaleInTopAnimator {
             ForEach(
                 this.myArr,
                 itemGeneratorFunc: {
-                    item: ArrayType, index: Int64 => GridItem() {
-                        child(item.value)
+                    itemScaleInTop: ArrayType, indexScaleInTop: Int64 => GridItem() {
+                        child(itemScaleInTop.value)
                     }
                         .animationStart(
                             AnimateParam(
@@ -150,29 +150,29 @@ class ScaleInTopAnimator {
                                 playMode: PlayMode.Normal
                             )
                         )
-                        .opacity(if (item.isNewValue) {
+                        .opacity(if (itemScaleInTop.isNewValue) {
                             this.trans
                         } else {
                             1
                         })
                         .scale(
-                            x: (if (item.isNewValue) {
+                            x: (if (itemScaleInTop.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
                             }),
-                            y: (if (item.isNewValue) {
+                            y: (if (itemScaleInTop.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
                             }),
-                            z: (if (item.isNewValue) {
+                            z: (if (itemScaleInTop.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
                             }),
                             centerX: 50.percent,
-                            centerY: (if (item.isNewValue) {
+                            centerY: (if (itemScaleInTop.isNewValue) {
                                 0.percent
                             } else {
                                 50.percent
@@ -180,14 +180,14 @@ class ScaleInTopAnimator {
                         )
                         .animationEnd()
                 },
-                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
+                keyGeneratorFunc: {itemScaleInTop: ArrayType, indexScaleInTop: Int64 => "${itemScaleInTop.toString()}${indexScaleInTop}"}
             )
         }
             .columnsTemplate(this.colNumStr)
             .columnsGap(2)
             .rowsGap(2)
             .onScrollIndex({
-                first: UInt32 => AppLog.info(first.toString())
+                firstScaleInTop: UInt32 => AppLog.info(firstScaleInTop.toString())
             })
             .width(100.percent)
     }

@@ -34,13 +34,13 @@ class FadeInRightAnimator {
         this
             .controller
             .addValueCallback = {
-            index: Int64, value: String => this.addValue(index, value);
+            indexFadeInRight: Int64, value: String => this.addValue(indexFadeInRight, value);
         }
 
         this
             .controller
             .deleteValueCallback = {
-            index: Int64 => this.deleteValue(index);
+            indexFadeInRight: Int64 => this.deleteValue(indexFadeInRight);
         }
 
         for (idx in 0..this.array.size) {
@@ -52,8 +52,8 @@ class FadeInRightAnimator {
         }
     }
 
-    func addValue(index: Int64, value: String) {
-        if (0 > index) {
+    func addValue(indexFadeInRight: Int64, value: String) {
+        if (0 > indexFadeInRight) {
             return
         }
         if (!this.isClick) {
@@ -66,7 +66,7 @@ class FadeInRightAnimator {
         this.offsetX = 50
         this
             .myArr
-            .insert(index, newArr)
+            .insert(indexFadeInRight, newArr)
 
         Timer.once(200 * Duration.millisecond) {
             =>
@@ -76,7 +76,7 @@ class FadeInRightAnimator {
                 this.duration = this
                     .controller
                     .duration
-                this.myArr[index] = newArr
+                this.myArr[indexFadeInRight] = newArr
 
                 Timer.once(Int64(this
                     .controller
@@ -94,25 +94,25 @@ class FadeInRightAnimator {
         }
     }
 
-    func deleteValue(index: Int64) {
-        if (0 > index) {
+    func deleteValue(indexFadeInRight: Int64) {
+        if (0 > indexFadeInRight) {
             return
         }
         if (!this.isClick) {
             return
         }
-        if (index >= this
+        if (indexFadeInRight >= this
             .myArr
             .size) {
             return
         }
         this.isClick = false
-        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
+        let currentData = ArrayType(isNewValue: this.myArr[indexFadeInRight].isNewValue, value: this.myArr[indexFadeInRight].value)
         currentData.isNewValue = true
         this.trans = 1
         this.duration = 0
         this.offsetX = 0
-        this.myArr[index] = currentData
+        this.myArr[indexFadeInRight] = currentData
 
         Timer.once(100 * Duration.millisecond) {
             =>
@@ -121,7 +121,7 @@ class FadeInRightAnimator {
                 this.duration = this
                     .controller
                     .duration
-                this.myArr[index] = currentData
+                this.myArr[indexFadeInRight] = currentData
 
                 Timer.once(Int64(this
                     .controller
@@ -130,7 +130,7 @@ class FadeInRightAnimator {
                         this.duration = 0
                         this
                             .myArr
-                            .remove(index)
+                            .remove(indexFadeInRight)
                         this.isClick = true
                 }
         }
@@ -141,8 +141,8 @@ class FadeInRightAnimator {
             ForEach(
                 this.myArr,
                 itemGeneratorFunc: {
-                    item: ArrayType, index: Int64 => GridItem() {
-                        child(item.value)
+                    itemFadeInRight: ArrayType, indexFadeInRight: Int64 => GridItem() {
+                        child(itemFadeInRight.value)
                     }
                         .animationStart(
                             AnimateParam(
@@ -153,13 +153,13 @@ class FadeInRightAnimator {
                                 playMode: PlayMode.Normal
                             )
                         )
-                        .opacity(if (item.isNewValue) {
+                        .opacity(if (itemFadeInRight.isNewValue) {
                             this.trans
                         } else {
                             1
                         })
                         .offset(
-                            x: (if (item.isNewValue) {
+                            x: (if (itemFadeInRight.isNewValue) {
                                 this.offsetX
                             } else {
                                 0
@@ -168,14 +168,14 @@ class FadeInRightAnimator {
                         )
                         .animationEnd()
                 },
-                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
+                keyGeneratorFunc: {itemFadeInRight: ArrayType, indexFadeInRight: Int64 => "${itemFadeInRight.toString()}${indexFadeInRight}"}
             )
         }
             .columnsTemplate(this.colNumStr)
             .columnsGap(2)
             .rowsGap(2)
             .onScrollIndex({
-                first: UInt32 => AppLog.info(first.toString())
+                firstFadeInRight: UInt32 => AppLog.info(firstFadeInRight.toString())
             })
             .width(100.percent)
     }

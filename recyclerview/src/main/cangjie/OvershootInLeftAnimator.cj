@@ -24,30 +24,30 @@ class OvershootInLeftAnimator {
     var isClick: Bool = true;
     @State
     var trans: Int64 = 0;
+    @Link
+    var columnsNum: Int64 = 1
     @State
     var x: Length = 0.percent;
     @State
-    var y: Length = 0.percent;
-    @Link
-    var columnsNum: Int64 = 1;
+    var y: Length = 0.percent
     var colNumStr: String = '';
 
     protected override func aboutToAppear() {
         this
             .controller
             .addValueCallback = {
-            index: Int64, value: String => this.addValue(index, value);
+            indexOvershootInLeft: Int64, valueOvershootInLeft: String => this.addValue(indexOvershootInLeft, valueOvershootInLeft);
         }
 
         this
             .controller
             .deleteValueCallback = {
-            index: Int64 => this.deleteValue(index);
+            indexOvershootInLeft: Int64 => this.deleteValue(indexOvershootInLeft);
         }
 
         for (idx in 0..this.array.size) {
-            let newArr = ArrayType(isNewValue: false, value: this.array[idx]);
-            this.myArr.append(newArr)
+            let newArrOvershootInLeft = ArrayType(isNewValue: false, value: this.array[idx]);
+            this.myArr.append(newArrOvershootInLeft)
         }
         for (i in 0..this.columnsNum) {
             this.colNumStr += '1fr '
@@ -62,24 +62,24 @@ class OvershootInLeftAnimator {
             return
         }
         this.isClick = false
-        let newArr = ArrayType(isNewValue: true, value: value);
+        let newArrOvershootInLeft = ArrayType(isNewValue: true, value: value);
         this.trans = 0
         this.duration = 0
         this.x = (-100).percent
         this.y = 0.percent
         this
             .myArr
-            .insert(index, newArr)
+            .insert(index, newArrOvershootInLeft)
         Timer.once(200 * Duration.millisecond) {
             =>
-                let newArr = ArrayType(isNewValue: true, value: value)
+                let newArrOvershootInLeft = ArrayType(isNewValue: true, value: value)
                 this.trans = 1
                 this.duration = this
                     .controller
                     .duration
                 this.x = 5.percent
                 this.y = 0.percent
-                this.myArr[index] = newArr
+                this.myArr[index] = newArrOvershootInLeft
                 Timer.once(Int64(this
                     .controller
                     .duration + 50) * Duration.millisecond) {
@@ -92,11 +92,11 @@ class OvershootInLeftAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxOvershootInLeft in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxOvershootInLeft]
                                 .isNewValue = false
                         }
                         this.isClick = true
@@ -104,27 +104,27 @@ class OvershootInLeftAnimator {
         }
     }
 
-    func deleteValue(index: Int64) {
-        if (0 > index) {
+    func deleteValue(indexOvershootInLeft: Int64) {
+        if (0 > indexOvershootInLeft) {
             return
         }
         if (!this.isClick) {
             return
         }
-        if (index >= this
+        if (indexOvershootInLeft >= this
             .myArr
             .size) {
             return
         }
         this.isClick = false
-        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
+        let currentData = ArrayType(isNewValue: this.myArr[indexOvershootInLeft].isNewValue, value: this.myArr[indexOvershootInLeft].value)
         currentData.isNewValue = true
 
         this.x = 5.percent
         this.y = 0.percent
         this.trans = 1
         this.duration = 0
-        this.myArr[index] = currentData
+        this.myArr[indexOvershootInLeft] = currentData
 
         Timer.once(100 * Duration.millisecond) {
             =>
@@ -133,17 +133,17 @@ class OvershootInLeftAnimator {
                 this.trans = 0
                 this.duration = this
                     .controller
-                    .duration
+                    .duration;
                 Timer.once(Int64(this
                     .controller
                     .duration + 100) * Duration.millisecond) {
                     =>
                         this.duration = 0
-                        this.x = 0.percent
+                        this.x = 0.percent;
                         this.y = 0.percent
                         this
                             .myArr
-                            .remove(index)
+                            .remove(indexOvershootInLeft)
                         this.isClick = true
                 }
         }
@@ -154,46 +154,46 @@ class OvershootInLeftAnimator {
             ForEach(
                 this.myArr,
                 itemGeneratorFunc: {
-                    item: ArrayType, index: Int64 => GridItem() {
+                    item: ArrayType, indexOvershootInLeft: Int64 => GridItem() {
                         child(item.value)
                     }
                         .animationStart(
                             AnimateParam(
-                                duration: this.duration,
-                                curve: Curve.Ease,
                                 delay: 50, // 动画延迟
                                 iterations: 1, // 播放次数
+                                duration: this.duration,
+                                curve: Curve.Ease,
                                 playMode: PlayMode.Normal
                             )
                         )
                         .opacity(if (item.isNewValue) {
-                            this.trans
+                            this.trans;
                         } else {
-                            1
+                            1;
                         })
                         .offset(
                             x: (if (item.isNewValue) {
-                                this.x
+                                this.x;
                             } else {
                                 0.vp
                             }),
                             y: (if (item.isNewValue) {
-                                this.y
+                                this.y;
                             } else {
                                 0.vp
                             })
                         )
                         .animationEnd()
                 },
-                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
+                keyGeneratorFunc: {item: ArrayType, indexOvershootInLeft: Int64 => "${item.toString()}${indexOvershootInLeft}"}
             )
         }
             .columnsTemplate(this.colNumStr)
-            .columnsGap(2)
-            .rowsGap(2)
             .onScrollIndex({
                 first: UInt32 => AppLog.info(first.toString())
             })
+            .columnsGap(2)
+            .rowsGap(2)
             .width(100.percent)
     }
 }

@@ -24,23 +24,23 @@ class ScaleInBottomAnimator {
     var isClick: Bool = true;
     @State
     var trans: Int64 = 0;
-    @State
-    var landing: Float32 = 1.0;
     @Link
     var columnsNum: Int64 = 1;
-    var colNumStr: String = '';
+    @State
+    var landing: Float32 = 1.0
+    var colNumStr: String = ''
 
     protected override func aboutToAppear() {
         this
             .controller
             .addValueCallback = {
-            index: Int64, value: String => this.addValue(index, value);
+            indexScaleInBottom: Int64, value: String => this.addValue(indexScaleInBottom, value);
         }
 
         this
             .controller
             .deleteValueCallback = {
-            index: Int64 => this.deleteValue(index);
+            indexScaleInBottom: Int64 => this.deleteValue(indexScaleInBottom);
         }
 
         for (idx in 0..this.array.size) {
@@ -52,8 +52,8 @@ class ScaleInBottomAnimator {
         }
     }
 
-    func addValue(index: Int64, value: String) {
-        if (0 > index) {
+    func addValue(indexScaleInBottom: Int64, value: String) {
+        if (0 > indexScaleInBottom) {
             return
         }
         if (!this.isClick) {
@@ -66,7 +66,7 @@ class ScaleInBottomAnimator {
         this.landing = 0.0
         this
             .myArr
-            .insert(index, newArr1)
+            .insert(indexScaleInBottom, newArr1)
         Timer.once(200 * Duration.millisecond) {
             =>
                 let newArr2 = ArrayType(isNewValue: true, value: value)
@@ -75,16 +75,16 @@ class ScaleInBottomAnimator {
                 this.duration = this
                     .controller
                     .duration
-                this.myArr[index] = newArr2
+                this.myArr[indexScaleInBottom] = newArr2
                 Timer.once(Int64(this
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (index in 0..this
+                        for (indexScaleInBottom in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[index]
+                                .myArr[indexScaleInBottom]
                                 .isNewValue = false
                         }
                         this.isClick = true
@@ -92,28 +92,28 @@ class ScaleInBottomAnimator {
         }
     }
 
-    func deleteValue(index: Int64) {
-        if (0 > index) {
+    func deleteValue(indexScaleInBottom: Int64) {
+        if (0 > indexScaleInBottom) {
             return
         }
         if (!this.isClick) {
             return
         }
-        if (index >= this
+        if (indexScaleInBottom >= this
             .myArr
             .size) {
             return
         }
         this.isClick = false
 
-        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
+        let currentData = ArrayType(isNewValue: this.myArr[indexScaleInBottom].isNewValue, value: this.myArr[indexScaleInBottom].value)
         currentData.isNewValue = true
 
         this.landing = 1.0
         this.trans = 1
         this.duration = 0
 
-        this.myArr[index].isNewValue = true
+        this.myArr[indexScaleInBottom].isNewValue = true
 
         Timer.once(100 * Duration.millisecond) {
             =>
@@ -122,7 +122,7 @@ class ScaleInBottomAnimator {
                 this.duration = this
                     .controller
                     .duration
-                this.myArr[index] = currentData
+                this.myArr[indexScaleInBottom] = currentData
 
                 Timer.once(Int64(this
                     .controller
@@ -132,7 +132,7 @@ class ScaleInBottomAnimator {
                         this.landing = 1.0
                         this
                             .myArr
-                            .remove(index)
+                            .remove(indexScaleInBottom)
                         this.isClick = true
                 }
         }
@@ -143,8 +143,8 @@ class ScaleInBottomAnimator {
             ForEach(
                 this.myArr,
                 itemGeneratorFunc: {
-                    item: ArrayType, index: Int64 => GridItem {
-                        child(item.value)
+                    itemScaleInBottom: ArrayType, indexScaleInBottom: Int64 => GridItem {
+                        child(itemScaleInBottom.value)
                     }
                         .animationStart(
                             AnimateParam(
@@ -155,29 +155,29 @@ class ScaleInBottomAnimator {
                                 playMode: PlayMode.Normal
                             )
                         )
-                        .opacity(if (item.isNewValue) {
+                        .opacity(if (itemScaleInBottom.isNewValue) {
                             this.trans
                         } else {
                             1
                         })
                         .scale(
-                            x: (if (item.isNewValue) {
+                            x: (if (itemScaleInBottom.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
                             }),
-                            y: (if (item.isNewValue) {
+                            y: (if (itemScaleInBottom.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
                             }),
-                            z: (if (item.isNewValue) {
+                            z: (if (itemScaleInBottom.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
                             }),
                             centerX: 50.percent,
-                            centerY: (if (item.isNewValue) {
+                            centerY: (if (itemScaleInBottom.isNewValue) {
                                 100.percent
                             } else {
                                 50.percent
@@ -185,14 +185,14 @@ class ScaleInBottomAnimator {
                         )
                         .animationEnd()
                 },
-                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
+                keyGeneratorFunc: {itemScaleInBottom: ArrayType, indexScaleInBottom: Int64 => "${itemScaleInBottom.toString()}${indexScaleInBottom}"}
             )
         }
             .columnsTemplate(this.colNumStr)
             .columnsGap(2)
             .rowsGap(2)
             .onScrollIndex({
-                first: UInt32 => AppLog.info(first.toString())
+                firstScaleInBottom: UInt32 => AppLog.info(firstScaleInBottom.toString())
             })
             .width(100.percent)
     }

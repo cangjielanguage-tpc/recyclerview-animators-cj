@@ -34,13 +34,13 @@ class LandingAnimator {
         this
             .controller
             .addValueCallback = {
-            index: Int64, value: String => this.addValue(index, value);
+            indexLanding: Int64, value: String => this.addValue(indexLanding, value);
         }
 
         this
             .controller
             .deleteValueCallback = {
-            index: Int64 => this.deleteValue(index);
+            indexLanding: Int64 => this.deleteValue(indexLanding);
         }
 
         for (idx in 0..this.array.size) {
@@ -52,8 +52,8 @@ class LandingAnimator {
         }
     }
 
-    func addValue(index: Int64, value: String) {
-        if (0 > index) {
+    func addValue(indexLanding: Int64, value: String) {
+        if (0 > indexLanding) {
             return
         }
         if (!this.isClick) {
@@ -66,7 +66,7 @@ class LandingAnimator {
         this.landing = 1.5
         this
             .myArr
-            .insert(index, newArr)
+            .insert(indexLanding, newArr)
         Timer.once(200 * Duration.millisecond) {
             =>
                 let newArr = ArrayType(isNewValue: true, value: value)
@@ -75,7 +75,7 @@ class LandingAnimator {
                     .controller
                     .duration
                 this.landing = 1.0
-                this.myArr[index] = newArr
+                this.myArr[indexLanding] = newArr
 
                 Timer.once(Int64(this
                     .controller
@@ -93,25 +93,25 @@ class LandingAnimator {
         }
     }
 
-    func deleteValue(index: Int64) {
-        if (0 > index) {
+    func deleteValue(indexLanding: Int64) {
+        if (0 > indexLanding) {
             return
         }
         if (!this.isClick) {
             return
         }
-        if (index >= this
+        if (indexLanding >= this
             .myArr
             .size) {
             return
         }
         this.isClick = false
-        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
+        let currentData = ArrayType(isNewValue: this.myArr[indexLanding].isNewValue, value: this.myArr[indexLanding].value)
         currentData.isNewValue = true
         this.trans = 1
         this.landing = 1.0
         this.duration = 0
-        this.myArr[index] = currentData
+        this.myArr[indexLanding] = currentData
 
         Timer.once(100 * Duration.millisecond) {
             =>
@@ -120,7 +120,7 @@ class LandingAnimator {
                 this.duration = this
                     .controller
                     .duration
-                this.myArr[index] = currentData
+                this.myArr[indexLanding] = currentData
                 Timer.once(Int64(this
                     .controller
                     .duration + 100) * Duration.millisecond) {
@@ -129,7 +129,7 @@ class LandingAnimator {
                         this.landing = 1.0
                         this
                             .myArr
-                            .remove(index)
+                            .remove(indexLanding)
                         this.isClick = true
                 }
         }
@@ -140,8 +140,8 @@ class LandingAnimator {
             ForEach(
                 this.myArr,
                 itemGeneratorFunc: {
-                    item: ArrayType, index: Int64 => GridItem() {
-                        child(item.value)
+                    itemLanding: ArrayType, indexLanding: Int64 => GridItem() {
+                        child(itemLanding.value)
                     }
                         .animationStart(
                             AnimateParam(
@@ -152,23 +152,23 @@ class LandingAnimator {
                                 playMode: PlayMode.Normal
                             )
                         )
-                        .opacity(if (item.isNewValue) {
+                        .opacity(if (itemLanding.isNewValue) {
                             this.trans
                         } else {
                             1
                         })
                         .scale(
-                            x: (if (item.isNewValue) {
+                            x: (if (itemLanding.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
                             }),
-                            y: (if (item.isNewValue) {
+                            y: (if (itemLanding.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
                             }),
-                            z: (if (item.isNewValue) {
+                            z: (if (itemLanding.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
@@ -176,14 +176,14 @@ class LandingAnimator {
                         )
                         .animationEnd()
                 },
-                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
+                keyGeneratorFunc: {itemLanding: ArrayType, indexLanding: Int64 => "${itemLanding.toString()}${indexLanding}"}
             )
         }
             .columnsTemplate(this.colNumStr)
             .columnsGap(2)
             .rowsGap(2)
             .onScrollIndex({
-                first: UInt32 => AppLog.info(first.toString())
+                firstLanding: UInt32 => AppLog.info(firstLanding.toString())
             })
             .width(100.percent)
     }

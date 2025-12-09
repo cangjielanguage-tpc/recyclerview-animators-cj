@@ -34,13 +34,13 @@ class ScaleInRightAnimator {
         this
             .controller
             .addValueCallback = {
-            index: Int64, value: String => this.addValue(index, value);
+            indexScaleInRight: Int64, value: String => this.addValue(indexScaleInRight, value);
         }
 
         this
             .controller
             .deleteValueCallback = {
-            index: Int64 => this.deleteValue(index);
+            indexScaleInRight: Int64 => this.deleteValue(indexScaleInRight);
         }
 
         for (idx in 0..this.array.size) {
@@ -52,8 +52,8 @@ class ScaleInRightAnimator {
         }
     }
 
-    func addValue(index: Int64, value: String) {
-        if (0 > index) {
+    func addValue(indexScaleInRight: Int64, value: String) {
+        if (0 > indexScaleInRight) {
             return
         }
         if (!this.isClick) {
@@ -66,7 +66,7 @@ class ScaleInRightAnimator {
         this.landing = 0.0
         this
             .myArr
-            .insert(index, newArr)
+            .insert(indexScaleInRight, newArr)
         Timer.once(200 * Duration.millisecond) {
             =>
                 let newArr = ArrayType(isNewValue: true, value: value)
@@ -75,17 +75,17 @@ class ScaleInRightAnimator {
                 this.duration = this
                     .controller
                     .duration
-                this.myArr[index] = newArr
+                this.myArr[indexScaleInRight] = newArr
 
                 Timer.once(Int64(this
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (index in 0..this
+                        for (indexScaleInRight in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[index]
+                                .myArr[indexScaleInRight]
                                 .isNewValue = false
                         }
                         this.isClick = true
@@ -93,27 +93,27 @@ class ScaleInRightAnimator {
         }
     }
 
-    func deleteValue(index: Int64) {
-        if (0 > index) {
+    func deleteValue(indexScaleInRight: Int64) {
+        if (0 > indexScaleInRight) {
             return
         }
         if (!this.isClick) {
             return
         }
-        if (index >= this
+        if (indexScaleInRight >= this
             .myArr
             .size) {
             return
         }
         this.isClick = false
 
-        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
+        let currentData = ArrayType(isNewValue: this.myArr[indexScaleInRight].isNewValue, value: this.myArr[indexScaleInRight].value)
         currentData.isNewValue = true
         this.landing = 1.0
         this.trans = 1
         this.duration = 0
 
-        this.myArr[index] = currentData
+        this.myArr[indexScaleInRight] = currentData
         Timer.once(100 * Duration.millisecond) {
             =>
                 this.landing = 0.0
@@ -129,7 +129,7 @@ class ScaleInRightAnimator {
                         this.landing = 1.0
                         this
                             .myArr
-                            .remove(index)
+                            .remove(indexScaleInRight)
                         this.isClick = true
                 }
         }
@@ -140,8 +140,8 @@ class ScaleInRightAnimator {
             ForEach(
                 this.myArr,
                 itemGeneratorFunc: {
-                    item: ArrayType, index: Int64 => GridItem() {
-                        child(item.value)
+                    itemScaleInRight: ArrayType, indexScaleInRight: Int64 => GridItem() {
+                        child(itemScaleInRight.value)
                     }
                         .animationStart(
                             AnimateParam(
@@ -152,28 +152,28 @@ class ScaleInRightAnimator {
                                 playMode: PlayMode.Normal
                             )
                         )
-                        .opacity(if (item.isNewValue) {
+                        .opacity(if (itemScaleInRight.isNewValue) {
                             this.trans
                         } else {
                             1
                         })
                         .scale(
-                            x: (if (item.isNewValue) {
+                            x: (if (itemScaleInRight.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
                             }),
-                            y: (if (item.isNewValue) {
+                            y: (if (itemScaleInRight.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
                             }),
-                            z: (if (item.isNewValue) {
+                            z: (if (itemScaleInRight.isNewValue) {
                                 this.landing
                             } else {
                                 1.0
                             }),
-                            centerX: (if (item.isNewValue) {
+                            centerX: (if (itemScaleInRight.isNewValue) {
                                 100.percent
                             } else {
                                 50.percent
@@ -182,14 +182,14 @@ class ScaleInRightAnimator {
                         )
                         .animationEnd()
                 },
-                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
+                keyGeneratorFunc: {itemScaleInRight: ArrayType, indexScaleInRight: Int64 => "${itemScaleInRight.toString()}${indexScaleInRight}"}
             )
         }
             .columnsTemplate(this.colNumStr)
             .columnsGap(2)
             .rowsGap(2)
             .onScrollIndex({
-                first: UInt32 => AppLog.info(first.toString())
+                firstScaleInRight: UInt32 => AppLog.info(firstScaleInRight.toString())
             })
             .width(100.percent)
     }

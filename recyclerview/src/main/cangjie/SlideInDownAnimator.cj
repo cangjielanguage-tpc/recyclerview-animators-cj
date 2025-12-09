@@ -36,13 +36,13 @@ class SlideInDownAnimator {
         this
             .controller
             .addValueCallback = {
-            index: Int64, value: String => this.addValue(index, value);
+            indexSlideInDown: Int64, value: String => this.addValue(indexSlideInDown, value);
         }
 
         this
             .controller
             .deleteValueCallback = {
-            index: Int64 => this.deleteValue(index);
+            indexSlideInDown: Int64 => this.deleteValue(indexSlideInDown);
         }
 
         for (idx in 0..this.array.size) {
@@ -54,8 +54,8 @@ class SlideInDownAnimator {
         }
     }
 
-    func addValue(index: Int64, value: String) {
-        if (0 > index) {
+    func addValue(indexSlideInDown: Int64, value: String) {
+        if (0 > indexSlideInDown) {
             return
         }
         if (!this.isClick) {
@@ -69,7 +69,7 @@ class SlideInDownAnimator {
         this.y = (-100).percent
         this
             .myArr
-            .insert(index, newArr)
+            .insert(indexSlideInDown, newArr)
 
         Timer.once(200 * Duration.millisecond) {
             =>
@@ -80,7 +80,7 @@ class SlideInDownAnimator {
                     .duration
                 this.x = 0.percent
                 this.y = 0.percent
-                this.myArr[index] = newArr
+                this.myArr[indexSlideInDown] = newArr
 
                 Timer.once(Int64(this
                     .controller
@@ -98,21 +98,21 @@ class SlideInDownAnimator {
         }
     }
 
-    func deleteValue(index: Int64) {
-        if (0 > index) {
+    func deleteValue(indexSlideInDown: Int64) {
+        if (0 > indexSlideInDown) {
             return
         }
         if (!this.isClick) {
             return
         }
-        if (index >= this
+        if (indexSlideInDown >= this
             .myArr
             .size) {
             return
         }
         this.isClick = false
 
-        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
+        let currentData = ArrayType(isNewValue: this.myArr[indexSlideInDown].isNewValue, value: this.myArr[indexSlideInDown].value)
 
         currentData.isNewValue = true
 
@@ -120,7 +120,7 @@ class SlideInDownAnimator {
         this.y = 0.percent
         this.trans = 1
         this.duration = 0
-        this.myArr[index] = currentData
+        this.myArr[indexSlideInDown] = currentData
 
         Timer.once(200 * Duration.millisecond) {
             this.x = 0.percent
@@ -128,7 +128,7 @@ class SlideInDownAnimator {
             this.duration = this
                 .controller
                 .duration
-            this.myArr[index] = currentData
+            this.myArr[indexSlideInDown] = currentData
         }
         Timer.once(Int64(this
             .controller
@@ -136,7 +136,7 @@ class SlideInDownAnimator {
             =>
                 this
                     .myArr
-                    .remove(index)
+                    .remove(indexSlideInDown)
                 this.isClick = true
         }
     }
@@ -146,8 +146,8 @@ class SlideInDownAnimator {
             ForEach(
                 this.myArr,
                 itemGeneratorFunc: {
-                    item: ArrayType, _: Int64 => GridItem() {
-                        child(item.value)
+                    itemSlideInDown: ArrayType, _: Int64 => GridItem() {
+                        child(itemSlideInDown.value)
                     }
                         .animationStart(
                             AnimateParam(
@@ -158,18 +158,18 @@ class SlideInDownAnimator {
                                 playMode: PlayMode.Normal
                             )
                         )
-                        .opacity(if (item.isNewValue) {
+                        .opacity(if (itemSlideInDown.isNewValue) {
                             this.trans
                         } else {
                             1
                         })
                         .offset(
-                            x: (if (item.isNewValue) {
+                            x: (if (itemSlideInDown.isNewValue) {
                                 this.x
                             } else {
                                 0.vp
                             }),
-                            y: (if (item.isNewValue) {
+                            y: (if (itemSlideInDown.isNewValue) {
                                 this.y
                             } else {
                                 0.vp
@@ -177,14 +177,14 @@ class SlideInDownAnimator {
                         )
                         .animationEnd()
                 },
-                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
+                keyGeneratorFunc: {itemSlideInDown: ArrayType, indexSlideInDown: Int64 => "${itemSlideInDown.toString()}${indexSlideInDown}"}
             )
         }
             .columnsTemplate(this.colNumStr)
             .columnsGap(2)
             .rowsGap(2)
             .onScrollIndex({
-                first: UInt32 => AppLog.info(first.toString())
+                firstSlideInDown: UInt32 => AppLog.info(firstSlideInDown.toString())
             })
             .width(100.percent)
     }

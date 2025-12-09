@@ -26,36 +26,36 @@ class OvershootInRightAnimator {
     var trans: Int64 = 0;
     @State
     var x: Length = 0.percent;
-    @State
-    var y: Length = 0.percent;
     @Link
     var columnsNum: Int64 = 1;
-    var colNumStr: String = '';
+    var colNumStr: String = ''
+    @State
+    var y: Length = 0.percent;
 
     protected override func aboutToAppear() {
         this
             .controller
             .addValueCallback = {
-            index: Int64, value: String => this.addValue(index, value);
+            indexOvershootInRight: Int64, value: String => this.addValue(indexOvershootInRight, value);
         }
 
         this
             .controller
             .deleteValueCallback = {
-            index: Int64 => this.deleteValue(index);
+            indexOvershootInRight: Int64 => this.deleteValue(indexOvershootInRight);
         }
 
         for (idx in 0..this.array.size) {
             let newArr = ArrayType(isNewValue: false, value: this.array[idx]);
-            this.myArr.append(newArr)
+            this.myArr.append(newArr);
         }
         for (i in 0..this.columnsNum) {
             this.colNumStr += '1fr '
         }
     }
 
-    func addValue(index: Int64, value: String) {
-        if (0 > index) {
+    func addValue(indexOvershootInRight: Int64, value: String) {
+        if (0 > indexOvershootInRight) {
             return
         }
         if (!this.isClick) {
@@ -63,13 +63,13 @@ class OvershootInRightAnimator {
         }
         this.isClick = false
         let newArr = ArrayType(isNewValue: true, value: value);
-        this.trans = 0
+        this.trans = 0;
         this.duration = 0
         this.x = 100.percent
         this.y = 0.percent
         this
             .myArr
-            .insert(index, newArr)
+            .insert(indexOvershootInRight, newArr)
         Timer.once(200 * Duration.millisecond) {
             =>
                 let newArr = ArrayType(isNewValue: true, value: value)
@@ -79,14 +79,14 @@ class OvershootInRightAnimator {
                     .duration
                 this.x = (-5).percent
                 this.y = 0.percent
-                this.myArr[index] = newArr
+                this.myArr[indexOvershootInRight] = newArr
 
                 Timer.once(Int64(this
                     .controller
                     .duration + 50) * Duration.millisecond) {
                     =>
                         this.duration = 50
-                        this.x = 0.percent
+                        this.x = 0.percent;
                 }
 
                 Timer.once(Int64(this
@@ -98,34 +98,34 @@ class OvershootInRightAnimator {
                                 .size) {
                             this
                                 .myArr[idx]
-                                .isNewValue = false
+                                .isNewValue = false;
                         }
                         this.isClick = true
                 }
         }
     }
 
-    func deleteValue(index: Int64) {
-        if (0 > index) {
+    func deleteValue(indexOvershootInRight: Int64) {
+        if (0 > indexOvershootInRight) {
             return
         }
         if (!this.isClick) {
             return
         }
-        if (index >= this
+        if (indexOvershootInRight >= this
             .myArr
             .size) {
             return
         }
         this.isClick = false
-        let currentData = ArrayType(isNewValue: this.myArr[index].isNewValue, value: this.myArr[index].value)
+        let currentData = ArrayType(isNewValue: this.myArr[indexOvershootInRight].isNewValue, value: this.myArr[indexOvershootInRight].value)
         currentData.isNewValue = true
 
         this.x = (-5).percent
         this.y = 0.percent
         this.trans = 1
         this.duration = 0
-        this.myArr[index] = currentData
+        this.myArr[indexOvershootInRight] = currentData
 
         Timer.once(100 * Duration.millisecond) {
             =>
@@ -134,17 +134,17 @@ class OvershootInRightAnimator {
                 this.trans = 0
                 this.duration = this
                     .controller
-                    .duration
+                    .duration;
                 Timer.once(Int64(this
                     .controller
                     .duration + 100) * Duration.millisecond) {
                     =>
                         this.duration = 0
-                        this.x = 0.percent
+                        this.x = 0.percent;
                         this.y = 0.percent
                         this
                             .myArr
-                            .remove(index)
+                            .remove(indexOvershootInRight)
                         this.isClick = true
                 }
         }
@@ -155,7 +155,7 @@ class OvershootInRightAnimator {
             ForEach(
                 this.myArr,
                 itemGeneratorFunc: {
-                    item: ArrayType, index: Int64 => GridItem() {
+                    item: ArrayType, indexOvershootInRight: Int64 => GridItem() {
                         child(item.value)
                     }
                         .animationStart(
@@ -168,15 +168,15 @@ class OvershootInRightAnimator {
                             )
                         )
                         .opacity(if (item.isNewValue) {
-                            this.trans
+                            this.trans;
                         } else {
                             1
                         })
                         .offset(
                             x: (if (item.isNewValue) {
-                                this.x
+                                this.x;
                             } else {
-                                0.vp
+                                0.vp;
                             }),
                             y: (if (item.isNewValue) {
                                 this.y
@@ -186,7 +186,7 @@ class OvershootInRightAnimator {
                         )
                         .animationEnd()
                 },
-                keyGeneratorFunc: {item: ArrayType, index: Int64 => "${item.toString()}${index}"}
+                keyGeneratorFunc: {item: ArrayType, indexOvershootInRight: Int64 => "${item.toString()}${indexOvershootInRight}"}
             )
         }
             .columnsTemplate(this.colNumStr)
