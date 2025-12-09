@@ -15,22 +15,22 @@ class SlideInDownAnimator {
     var array: ObservedArrayList<String> = ObservedArrayList<String>();
     @BuilderParam
     var child: (String) -> Unit
+    @State
+    var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
     @Link
     var controller: Controller = Controller();
     @State
-    var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
+    var duration: Int32 = 0
+    var isClick: Bool = true
     @State
-    var duration: Int32 = 0;
-    var isClick: Bool = true;
+    var x: Length = 0.percent
     @State
-    var trans: Int64 = 0;
+    var y: Length = 0.percent
     @State
-    var x: Length = 0.percent;
-    @State
-    var y: Length = 0.percent;
+    var trans: Int64 = 0
     @Link
-    var columnsNum: Int64 = 1;
-    var colNumStr: String = '';
+    var columnsNum: Int64 = 1
+    var colNumStr: String = ''
 
     protected override func aboutToAppear() {
         this
@@ -86,11 +86,11 @@ class SlideInDownAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxSlideInDown in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxSlideInDown]
                                 .isNewValue = false
                         }
                         this.isClick = true

@@ -15,20 +15,20 @@ class ScaleInRightAnimator {
     var array: ObservedArrayList<String> = ObservedArrayList<String>();
     @BuilderParam
     var child: (String) -> Unit
+    var colNumStr: String = '';
     @Link
     var controller: Controller = Controller();
     @State
     var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
     @State
     var duration: Int32 = 0;
-    var isClick: Bool = true;
     @State
     var trans: Int64 = 0;
     @State
     var landing: Float32 = 1.0;
+    var isClick: Bool = true;
     @Link
     var columnsNum: Int64 = 1;
-    var colNumStr: String = '';
 
     protected override func aboutToAppear() {
         this

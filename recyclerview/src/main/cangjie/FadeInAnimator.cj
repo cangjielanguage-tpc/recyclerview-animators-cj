@@ -18,7 +18,7 @@ class FadeInAnimator {
     @Link
     var controller: Controller = Controller();
     @State
-    var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
+    var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>()
     @State
     var duration: Int32 = 0;
     var isClick: Bool = true;
@@ -76,8 +76,8 @@ class FadeInAnimator {
 
                 Timer.once(Int64(controller.duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..myArr.size) {
-                            myArr[idx].isNewValue = false
+                        for (idxFadeIn in 0..myArr.size) {
+                            myArr[idxFadeIn].isNewValue = false
                         }
                         isClick = true
                 }

@@ -81,11 +81,11 @@ class FadeInLeftAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxFadeInLeft in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxFadeInLeft]
                                 .isNewValue = false
                         }
                         this.isClick = true

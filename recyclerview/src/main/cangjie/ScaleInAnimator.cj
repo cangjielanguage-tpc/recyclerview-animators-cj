@@ -13,8 +13,6 @@ import std.sync.*
 class ScaleInAnimator {
     @Link
     var array: ObservedArrayList<String> = ObservedArrayList<String>();
-    @BuilderParam
-    var child: (String) -> Unit
     @Link
     var controller: Controller = Controller();
     @State
@@ -24,6 +22,8 @@ class ScaleInAnimator {
     var isClick: Bool = true;
     @Link
     var columnsNum: Int64 = 1;
+    @BuilderParam
+    var child: (String) -> Unit
     @State
     var trans: Int64 = 0;
     var colNumStr: String = '';
@@ -84,11 +84,11 @@ class ScaleInAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxScaleIn in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxScaleIn]
                                 .isNewValue = false;
                         }
                         this.isClick = true;

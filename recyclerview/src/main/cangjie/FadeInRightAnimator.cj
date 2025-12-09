@@ -82,11 +82,11 @@ class FadeInRightAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxFadeInRight in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxFadeInRight]
                                 .isNewValue = false
                         }
                         this.isClick = true

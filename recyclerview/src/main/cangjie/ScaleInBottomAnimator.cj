@@ -19,9 +19,9 @@ class ScaleInBottomAnimator {
     var controller: Controller = Controller();
     @State
     var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
-    @State
-    var duration: Int32 = 0;
     var isClick: Bool = true;
+    @State
+    var duration: Int32 = 0
     @State
     var trans: Int64 = 0;
     @Link

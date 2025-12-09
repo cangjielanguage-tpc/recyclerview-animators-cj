@@ -81,11 +81,11 @@ class FadeInUpAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxFadeInUp in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxFadeInUp]
                                 .isNewValue = false
                         }
                         this.isClick = true

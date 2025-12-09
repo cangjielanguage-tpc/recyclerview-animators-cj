@@ -17,18 +17,18 @@ class ScaleInTopAnimator {
     var child: (String) -> Unit
     @Link
     var controller: Controller = Controller();
+    var isClick: Bool = true
     @State
     var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
     @State
     var duration: Int32 = 0;
-    var isClick: Bool = true;
     @State
     var trans: Int64 = 0;
+    @Link
+    var columnsNum: Int64 = 1
+    var colNumStr: String = '';
     @State
     var landing: Float32 = 1.0;
-    @Link
-    var columnsNum: Int64 = 1;
-    var colNumStr: String = '';
 
     protected override func aboutToAppear() {
         this
@@ -80,11 +80,11 @@ class ScaleInTopAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxScaleInTop in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxScaleInTop]
                                 .isNewValue = false
                         }
                         this.isClick = true
@@ -114,16 +114,16 @@ class ScaleInTopAnimator {
         this.myArr[indexScaleInTop] = currentData
         Timer.once(100 * Duration.millisecond) {
             =>
-                this.landing = 0.0
+                this.landing = 0.0;
                 this.trans = 1
                 this.duration = this
                     .controller
-                    .duration
+                    .duration;
                 Timer.once(Int64(this
                     .controller
                     .duration + 100) * Duration.millisecond) {
                     =>
-                        this.duration = 0
+                        this.duration = 0;
                         this.landing = 1.0
                         this
                             .myArr

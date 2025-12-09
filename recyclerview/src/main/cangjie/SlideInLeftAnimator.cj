@@ -18,18 +18,18 @@ class SlideInLeftAnimator {
     @Link
     var controller: Controller = Controller();
     @State
-    var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
-    @State
     var duration: Int32 = 0;
     var isClick: Bool = true;
     @State
     var trans: Int64 = 0;
     @State
-    var x: Length = 0.percent;
+    var x: Length = 0.percent
     @State
     var y: Length = 0.percent;
     @Link
     var columnsNum: Int64 = 1;
+    @State
+    var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
     var colNumStr: String = '';
 
     protected override func aboutToAppear() {
@@ -85,11 +85,11 @@ class SlideInLeftAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxSlideInLeft in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxSlideInLeft]
                                 .isNewValue = false
                         }
                         this.isClick = true

@@ -19,11 +19,11 @@ class SlideInRightAnimator {
     var controller: Controller = Controller();
     @State
     var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
-    @State
-    var duration: Int32 = 0;
     var isClick: Bool = true;
     @State
     var trans: Int64 = 0;
+    @State
+    var duration: Int32 = 0;
     @State
     var x: Length = 0.percent;
     @State
@@ -86,11 +86,11 @@ class SlideInRightAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxSlideInRight in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxSlideInRight]
                                 .isNewValue = false
                         }
                         this.isClick = true

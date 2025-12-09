@@ -20,15 +20,15 @@ class LandingAnimator {
     @State
     var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
     @State
-    var duration: Int32 = 0;
-    var isClick: Bool = true;
+    var duration: Int32 = 0
     @State
     var trans: Int64 = 0;
     @State
-    var landing: Float32 = 1.0;
+    var landing: Float32 = 1.0
     @Link
-    var columnsNum: Int64 = 1;
-    var colNumStr: String = '';
+    var columnsNum: Int64 = 1
+    var colNumStr: String = ''
+    var isClick: Bool = true
 
     protected override func aboutToAppear() {
         this
@@ -81,11 +81,11 @@ class LandingAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxLanding in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxLanding]
                                 .isNewValue = false
                         }
                         this.isClick = true

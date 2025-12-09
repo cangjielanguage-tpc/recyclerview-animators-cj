@@ -15,8 +15,6 @@ class SlideInUpAnimator {
     var array: ObservedArrayList<String> = ObservedArrayList<String>();
     @BuilderParam
     var child: (String) -> Unit
-    @Link
-    var controller: Controller = Controller();
     @State
     var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
     @State
@@ -24,6 +22,8 @@ class SlideInUpAnimator {
     var isClick: Bool = true;
     @State
     var trans: Int64 = 0;
+    @Link
+    var controller: Controller = Controller();
     @State
     var x: Length = 0.percent;
     @State
@@ -85,11 +85,11 @@ class SlideInUpAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxSlideInUp in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxSlideInUp]
                                 .isNewValue = false
                         }
                         this.isClick = true

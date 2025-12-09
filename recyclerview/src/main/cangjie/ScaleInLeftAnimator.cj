@@ -18,17 +18,17 @@ class ScaleInLeftAnimator {
     @Link
     var controller: Controller = Controller();
     @State
-    var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>();
-    @State
-    var duration: Int32 = 0;
+    var myArr: ObservedArrayList<ArrayType> = ObservedArrayList<ArrayType>()
     var isClick: Bool = true;
+    @State
+    var duration: Int32 = 0
     @State
     var trans: Int64 = 0;
     @State
-    var landing: Float32 = 1.0;
+    var landing: Float32 = 1.0
+    var colNumStr: String = '';
     @Link
     var columnsNum: Int64 = 1;
-    var colNumStr: String = '';
 
     protected override func aboutToAppear() {
         this
@@ -80,11 +80,11 @@ class ScaleInLeftAnimator {
                     .controller
                     .duration) * Duration.millisecond) {
                     =>
-                        for (idx in 0..this
+                        for (idxScaleInLeft in 0..this
                                 .myArr
                                 .size) {
                             this
-                                .myArr[idx]
+                                .myArr[idxScaleInLeft]
                                 .isNewValue = false
                         }
                         this.isClick = true
@@ -116,16 +116,16 @@ class ScaleInLeftAnimator {
         Timer.once(100 * Duration.millisecond) {
             =>
                 this.landing = 0.0
-                this.trans = 1
                 this.duration = this
                     .controller
                     .duration
+                this.trans = 1
                 Timer.once(Int64(this
                     .controller
                     .duration + 100) * Duration.millisecond) {
                     =>
-                        this.duration = 0
                         this.landing = 1.0
+                        this.duration = 0;
                         this
                             .myArr
                             .remove(indexScaleInLeft)
